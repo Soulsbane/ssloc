@@ -3,7 +3,7 @@ module filetype;
 import std.stdio : writeln;
 import std.container;
 import std.string : lineSplitter;
-import std.algorithm.searching : findSplit;
+import std.algorithm.searching : findSplit, canFind;
 import std.conv : to;
 
 enum LanguageData = import("language.dat");
@@ -16,6 +16,11 @@ struct FileTypeData
 
 alias FileTypeDataArray  = Array!FileTypeData;
 FileTypeDataArray fileTypeDataArray_;
+
+shared static this()
+{
+	loadFileTypeData();
+}
 
 void loadFileTypeData()
 {
@@ -35,6 +40,13 @@ void loadFileTypeData()
 
 string getLanguageFromFileExtension(const string extension)
 {
-	string language;
-	return language;
+	foreach(entry; fileTypeDataArray_)
+	{
+		if(entry.extensions.canFind(extension))
+		{
+			return entry.language;
+		}
+	}
+
+	return "Unknown";
 }
