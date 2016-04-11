@@ -8,8 +8,48 @@ import std.conv;
 import std.encoding;
 import std.utf;
 import std.exception;
+import std.range : repeat;
 
-size_t[string] _LineData;
+enum COLUMN_WIDTH = 80;
+
+// TODO: Possibly add blank lines count.
+enum Fields
+{
+	language = 40,
+	files = 20,
+	lines = 20
+}
+
+void writeDivider()
+{
+	writeln("-".repeat(COLUMN_WIDTH).join);
+}
+
+void writeField(const string value, Fields field)
+{
+	size_t length = value.length;
+	size_t numberOfSpaces = field - length;
+
+	if(field == Fields.lines)
+	{
+		write(" ".repeat(numberOfSpaces).join);
+		write(value);
+	}
+	else
+	{
+		write(value);
+		write(" ".repeat(numberOfSpaces).join);
+	}
+}
+
+void writeHeader()
+{
+	writeField("Language", Fields.language);
+	writeField("Files", Fields.files);
+	writeField("Lines", Fields.lines);
+	writeln;
+	writeDivider;
+}
 
 void scan()
 {
@@ -36,9 +76,16 @@ void scan()
 	}
 
 	writeln("Number of lines: ", count);
+	writeDivider();
 }
 
 void main()
 {
 	scan();
+/*	writeHeader;
+	writeField("Dlang", Fields.language);
+	writeField("534", Fields.files);
+	writeField("35678", Fields.lines);
+	writeln;
+	writeDivider;*/
 }
