@@ -9,6 +9,7 @@ import std.encoding;
 import std.utf;
 import std.exception;
 import std.range : repeat;
+import std.container;
 
 enum COLUMN_WIDTH = 80;
 
@@ -19,6 +20,15 @@ enum Fields
 	files = 20,
 	lines = 20
 }
+
+struct LanguageData
+{
+	string language;
+	size_t numberOfFiles;
+	size_t numberOfLines;
+}
+
+alias LanguageDataArray = Array!LanguageData;
 
 void writeDivider()
 {
