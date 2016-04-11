@@ -93,7 +93,8 @@ void scan()
 
 void main()
 {
-	scan();
+	//scan();
+	dumpFileTypeData();
 /*	writeHeader;
 	writeField("Dlang", Fields.language);
 	writeField("534", Fields.files);
