@@ -11,6 +11,8 @@ import std.exception;
 import std.range : repeat;
 import std.container;
 
+import filetype;
+
 enum COLUMN_WIDTH = 80;
 
 // TODO: Possibly add blank lines count.
