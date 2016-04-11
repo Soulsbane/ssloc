@@ -88,13 +88,11 @@ void scan()
 	}
 
 	writeln("Number of lines: ", count);
-	writeDivider();
 }
 
 void main()
 {
-	//scan();
-	dumpFileTypeData();
+	scan();
 /*	writeHeader;
 	writeField("Dlang", Fields.language);
 	writeField("534", Fields.files);
