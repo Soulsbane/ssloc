@@ -1,0 +1,9 @@
+language {
+	name "DLang"
+	extensions "d,di"
+}
+
+language {
+	name "Lua"
+	extensions "lua"
+}

@@ -6,7 +6,9 @@ import std.string : lineSplitter;
 import std.algorithm.searching : findSplit, canFind;
 import std.conv : to;
 
-enum LanguageData = import("language.dat");
+import sdlang;
+
+enum LanguageData = import("language.sdl");
 
 struct FileTypeData
 {
@@ -24,15 +26,25 @@ shared static this()
 
 void loadFileTypeData()
 {
-	auto lines = LanguageData.lineSplitter();
+	Tag root;
+	root = parseSource(LanguageData.to!string);
 
-	foreach(wholeLine; lines)
+	foreach(tag; root.tags["language"])
 	{
-		auto line = findSplit(wholeLine.to!string, ";");
 		FileTypeData data;
 
-		data.extensions = line[0];
-		data.language = line[2];
+		foreach(pair; tag.tags)
+		{
+			final switch(pair.name)
+			{
+				case "name":
+					data.language = pair.values[0].get!string;
+					break;
+				case "extensions":
+					data.extensions = pair.values[0].get!string;
+					break;
+			}
+		}
 
 		fileTypeDataArray_.insert(data);
 	}
