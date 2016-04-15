@@ -39,7 +39,7 @@ void writeDivider()
 
 void writeField(const string value, Fields field)
 {
-	size_t length = value.length;
+	immutable size_t length = value.length;
 	size_t numberOfSpaces = field - length;
 
 	if(field == Fields.lines)

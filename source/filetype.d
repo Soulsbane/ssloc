@@ -8,23 +8,23 @@ import std.conv : to;
 
 import sdlang;
 
-enum LanguageData = import("language.sdl");
+private enum LanguageData = import("language.sdl");
 
-struct FileTypeData
+private struct FileTypeData
 {
 	string language;
 	string extensions;
 }
 
-alias FileTypeDataArray  = Array!FileTypeData;
-FileTypeDataArray fileTypeDataArray_;
+private alias FileTypeDataArray  = Array!FileTypeData;
+private FileTypeDataArray fileTypeDataArray_;
 
 shared static this()
 {
 	loadFileTypeData();
 }
 
-void loadFileTypeData()
+private void loadFileTypeData()
 {
 	Tag root;
 	root = parseSource(LanguageData.to!string);
