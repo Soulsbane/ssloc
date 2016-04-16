@@ -28,6 +28,8 @@ struct LanguageData
 	string language;
 	size_t numberOfFiles;
 	size_t numberOfLines;
+	size_t blank;
+	size_t comments;
 }
 
 alias LanguageDataArray = Array!LanguageData;
@@ -56,6 +58,7 @@ void writeField(const string value, Fields field)
 
 void writeHeader()
 {
+	writeln;
 	writeField("Language", Fields.language);
 	writeField("Files", Fields.files);
 	writeField("Lines", Fields.lines);
@@ -93,7 +96,7 @@ void scan()
 void main()
 {
 	scan();
-/*	writeHeader;
+	/*writeHeader;
 	writeField("Dlang", Fields.language);
 	writeField("534", Fields.files);
 	writeField("35678", Fields.lines);
