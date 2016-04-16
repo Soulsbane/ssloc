@@ -7,3 +7,33 @@ language {
 	name "Lua"
 	extensions "lua"
 }
+
+language {
+	name "SDLang"
+	extensions "sdl"
+}
+
+language {
+	name "Python"
+	extensions "py"
+}
+
+language {
+	name "C/C++"
+	extensions "cpp,cxx,h,hh"
+}
+
+language {
+	name "Ruby"
+	extensions "rb"
+}
+
+language {
+	name "Perl"
+	extensions "pl, cgi"
+}
+
+language {
+	name "C#"
+	extensions "cs"
+}
