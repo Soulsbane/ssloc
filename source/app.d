@@ -14,14 +14,15 @@ import std.conv;
 
 import filetype;
 
-enum COLUMN_WIDTH = 80;
+enum COLUMN_WIDTH = 60;
 
-// TODO: Possibly add blank lines count.
 enum Fields
 {
-	language = 40,
-	files = 20,
-	code = 20
+	language = 20,
+	files = 10,
+	code = 10,
+	blank = 10,
+	comments = 10
 }
 
 struct LanguageData
@@ -63,6 +64,8 @@ void writeHeader()
 	writeln;
 	writeField("Language", Fields.language);
 	writeField("Files", Fields.files);
+	writeField("Blank", Fields.blank);
+	writeField("Comments", Fields.comments);
 	writeField("Code", Fields.code);
 	writeDivider;
 }
@@ -115,6 +118,8 @@ void main()
 	{
 		writeField(key, Fields.language);
 		writeField(data.files, Fields.files);
+		writeField(data.blank, Fields.blank);
+		writeField(data.comments, Fields.comments);
 		writeField(data.code, Fields.code);
 		writeDivider;
 	}
