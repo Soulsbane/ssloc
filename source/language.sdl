@@ -62,3 +62,8 @@ language {
 	name "Visual Basic"
 	extensions "cls, vb, bas, vbw, vbp, frm"
 }
+
+language {
+	name "JSON"
+	extensions "json"
+}
