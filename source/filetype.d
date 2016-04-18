@@ -54,9 +54,15 @@ string getLanguageFromFileExtension(const string extension)
 {
 	foreach(entry; fileTypeDataArray_)
 	{
-		if(entry.extensions.canFind(extension))
+		import std.array : split;
+		immutable auto parts = entry.extensions.split(",");
+
+		foreach(part; parts)
 		{
-			return entry.language;
+			if(part == extension)
+			{
+				return entry.language;
+			}
 		}
 	}
 

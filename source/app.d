@@ -11,6 +11,7 @@ import std.exception;
 import std.range : repeat;
 import std.container;
 import std.conv;
+import std.algorithm;
 
 import filetype;
 
@@ -72,12 +73,15 @@ void writeHeader()
 
 void scan()
 {
-	foreach(DirEntry e; std.parallelism.parallel(dirEntries(".", "*.*", SpanMode.breadth)))
+	auto files = getcwd.dirEntries(SpanMode.depth)
+		.filter!(a => (!a.name.startsWith(".") && a.isFile));
+
+	foreach(e; parallel(files))
 	{
 		auto name = buildNormalizedPath(e.name);
-		immutable string fileExtension = e.name.extension.removechars(".");
+		immutable string fileExtension = e.name.baseName.extension.removechars(".");
 
-		if(e.isFile && !name.startsWith("."))
+		if(e.isFile && !e.name.baseName.startsWith("."))
 		{
 			immutable string text = readText(name).ifThrown!UTFException("");
 			auto lines = text.lineSplitter();
