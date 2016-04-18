@@ -75,7 +75,8 @@ void scan()
 		.array
 		.filter!(a => (a.isFile));
 
-	foreach(e; parallel(files))
+	//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
+	foreach(e; files)
 	{
 		import std.path : baseName, buildNormalizedPath, extension;
 
