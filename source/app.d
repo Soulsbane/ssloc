@@ -119,7 +119,7 @@ void scan()
 
 bool isHiddenFileOrDir(DirEntry entry)
 {
-	import std.path : dirSeparator, pathSplitter;
+	import std.path : pathSplitter;
 	auto dirParts = entry.name.pathSplitter;
 
 	foreach(dirPart; dirParts)
