@@ -90,28 +90,36 @@ void scan()
 			immutable string text = readText(name).ifThrown!UTFException("");
 			auto lines = text.lineSplitter();
 			immutable string language = getLanguageFromFileExtension(fileExtension);
-			LanguageData data;
 
-			if(language in _ParseResults)
+			if(language != "Unknown")
 			{
-				data = _ParseResults[language];
+				LanguageData data;
+
+				if(language in _ParseResults)
+				{
+					data = _ParseResults[language];
+				}
+
+				++data.files;
+
+				foreach(line; lines)
+				{
+					if(!line.empty)
+					{
+						++data.code;
+					}
+					else
+					{
+						++data.blank;
+					}
+				}
+
+				_ParseResults[language] = data;
 			}
-
-			++data.files;
-
-			foreach(line; lines)
+			else
 			{
-				if(!line.empty)
-				{
-					++data.code;
-				}
-				else
-				{
-					++data.blank;
-				}
+				debug writeln("Unknown extension, ", fileExtension, " found!");
 			}
-
-			_ParseResults[language] = data;
 
 		}
 	}
