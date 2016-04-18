@@ -1,6 +1,8 @@
 import std.stdio : writeln, write;
 import std.string : join, removechars, lineSplitter, empty;
 import std.range : repeat;
+import std.file : dirEntries, DirEntry, getcwd, SpanMode;
+import std.algorithm : filter, startsWith;
 
 import filetype;
 
@@ -65,11 +67,13 @@ void writeHeader()
 void scan()
 {
 	import std.parallelism : parallel;
-	import std.algorithm : filter, startsWith;
 	import std.file : getcwd, dirEntries, SpanMode, readText;
+	import std.array : array;
 
 	auto files = getcwd.dirEntries(SpanMode.depth)
-		.filter!(a => (!a.name.startsWith(".") && a.isFile));
+		.filter!(a => (!isHiddenFileOrDir(a)))
+		.array
+		.filter!(a => (a.isFile));
 
 	foreach(e; parallel(files))
 	{
@@ -111,6 +115,22 @@ void scan()
 
 		}
 	}
+}
+
+bool isHiddenFileOrDir(DirEntry entry)
+{
+	import std.path : dirSeparator, pathSplitter;
+	auto dirParts = entry.name.pathSplitter;
+
+	foreach(dirPart; dirParts)
+	{
+		if(dirPart.startsWith("."))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void main()
