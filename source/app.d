@@ -1,17 +1,6 @@
-import std.stdio;
-import std.parallelism;
-import std.file;
-import std.string;
-import std.path;
-import std.array;
-import std.conv;
-import std.encoding;
-import std.utf;
-import std.exception;
+import std.stdio : writeln, write;
+import std.string : join, removechars, lineSplitter, empty;
 import std.range : repeat;
-import std.container;
-import std.conv;
-import std.algorithm;
 
 import filetype;
 
@@ -44,6 +33,8 @@ void writeDivider()
 
 void writeField(T)(const T value, Fields field)
 {
+	import std.conv : to;
+
 	immutable string strValue = value.to!string;
 	immutable size_t length = strValue.length;
 	size_t numberOfSpaces = field - length;
@@ -73,16 +64,25 @@ void writeHeader()
 
 void scan()
 {
+	import std.parallelism : parallel;
+	import std.algorithm : filter, startsWith;
+	import std.file : getcwd, dirEntries, SpanMode, readText;
+
 	auto files = getcwd.dirEntries(SpanMode.depth)
 		.filter!(a => (!a.name.startsWith(".") && a.isFile));
 
 	foreach(e; parallel(files))
 	{
+		import std.path : baseName, buildNormalizedPath, extension;
+
 		auto name = buildNormalizedPath(e.name);
 		immutable string fileExtension = e.name.baseName.extension.removechars(".");
 
 		if(e.isFile && !e.name.baseName.startsWith("."))
 		{
+			import std.utf : UTFException;
+			import std.exception : ifThrown;
+
 			immutable string text = readText(name).ifThrown!UTFException("");
 			auto lines = text.lineSplitter();
 			immutable string language = getLanguageFromFileExtension(fileExtension);

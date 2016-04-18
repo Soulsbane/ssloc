@@ -1,12 +1,6 @@
 module filetype;
 
-import std.stdio : writeln;
-import std.container;
-import std.string : lineSplitter;
-import std.algorithm.searching : findSplit, canFind;
-import std.conv : to;
-
-import sdlang;
+import std.container : Array;
 
 private enum LanguageData = import("language.sdl");
 
@@ -26,6 +20,9 @@ shared static this()
 
 private void loadFileTypeData()
 {
+	import std.conv : to;
+	import sdlang : Tag, parseSource;
+
 	Tag root;
 	root = parseSource(LanguageData.to!string);
 
