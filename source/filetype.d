@@ -1,55 +1,85 @@
 module filetype;
 
 import std.container : Array;
+import std.string : removechars, lineSplitter;
+import std.container : Array;
+import std.regex : Regex, ctRegex, matchFirst;
+import std.parallelism : parallel;
 
-private enum LanguageData = import("language.sdl");
+enum LanguageData = import("language.sdl");
+Regex!char _Pattern = ctRegex!(r"\s+(?P<key>\w+)\s+(?P<value>.*)");
 
-private struct FileTypeData
+struct Record
 {
-	string language;
+	string name;
 	string extensions;
 }
 
-private alias FileTypeDataArray  = Array!FileTypeData;
-private FileTypeDataArray fileTypeDataArray_;
+alias RecordArray = Array!Record;
+alias StringArray = Array!string;
+
+RecordArray _DatArray;
 
 shared static this()
 {
 	loadFileTypeData();
 }
 
-private void loadFileTypeData()
+private Record convertToRecord(StringArray strArray)
 {
-	import std.conv : to;
-	import sdlang : Tag, parseSource;
+	Record data;
 
-	Tag root;
-	root = parseSource(LanguageData.to!string);
-
-	foreach(tag; root.tags["language"])
+	foreach(line; strArray)
 	{
-		FileTypeData data;
+		auto re = matchFirst(line, _Pattern);
 
-		foreach(pair; tag.tags)
+		if(!re.empty)
 		{
-			final switch(pair.name)
+			immutable string key = re["key"].removechars("\"");
+			immutable string value = re["value"].removechars("\"");
+
+			final switch(key)
 			{
 				case "name":
-					data.language = pair.values[0].get!string;
+					data.name = value;
 					break;
 				case "extensions":
-					data.extensions = pair.values[0].get!string;
+					data.extensions = value;
 					break;
 			}
 		}
+	}
 
-		fileTypeDataArray_.insert(data);
+	return data;
+}
+
+private void loadFileTypeData()
+{
+	import std.algorithm : canFind;
+	auto lines = LanguageData.lineSplitter();
+
+	StringArray strArray;
+
+	foreach(line; lines)
+	{
+		if(line.canFind("{"))
+		{
+			strArray.clear();
+		}
+		else if(line.canFind("}"))
+		{
+			_DatArray.insert(convertToRecord(strArray));
+		}
+		else
+		{
+			strArray.insert(line);
+		}
 	}
 }
 
 string getLanguageFromFileExtension(const string extension)
 {
-	foreach(entry; fileTypeDataArray_)
+	foreach(entry; _DatArray)
 	{
 		import std.array : split;
 		immutable auto parts = entry.extensions.split(",");
@@ -58,7 +88,7 @@ string getLanguageFromFileExtension(const string extension)
 		{
 			if(part == extension)
 			{
-				return entry.language;
+				return entry.name;
 			}
 		}
 	}
