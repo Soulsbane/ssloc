@@ -1,69 +1,69 @@
-language {
+{
 	name "DLang"
 	extensions "d,di"
 }
 
-language {
+{
 	name "Lua"
 	extensions "lua"
 }
 
-language {
+{
 	name "SDLang"
 	extensions "sdl"
 }
 
-language {
+{
 	name "Python"
 	extensions "py"
 }
 
-language {
+{
 	name "C/C++"
 	extensions "cpp,cxx,h,hh"
 }
 
-language {
+{
 	name "Ruby"
 	extensions "rb"
 }
 
-language {
+{
 	name "Perl"
 	extensions "pl, cgi"
 }
 
-language {
+{
 	name "C#"
 	extensions "cs"
 }
 
-language {
+{
 	name "HTML"
 	extensions "html, htm"
 }
 
-language {
+{
 	name "PHP"
 	extensions "php, php3"
 }
 
-language {
+{
 	name "CSS"
 	extensions "css"
 }
 
-language {
+{
 	name "Java"
 	extensions "java"
 }
 
-language {
+{
 	name "Visual Basic"
 	extensions "cls, vb, bas, vbw, vbp, frm"
 }
 
-language {
+{
 	name "JSON"
 	extensions "json"
 }
