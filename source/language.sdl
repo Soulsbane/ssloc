@@ -1,6 +1,6 @@
 {
 	name "DLang"
-	extensions "d,di"
+	extensions "d,di,ddoc"
 }
 
 {
@@ -20,7 +20,7 @@
 
 {
 	name "C/C++"
-	extensions "cpp,cxx,h,hh"
+	extensions "c,cpp,cxx,h,hh,hpp"
 }
 
 {
@@ -30,7 +30,7 @@
 
 {
 	name "Perl"
-	extensions "pl, cgi"
+	extensions "pl,cgi"
 }
 
 {
@@ -40,12 +40,12 @@
 
 {
 	name "HTML"
-	extensions "html, htm"
+	extensions "html,htm"
 }
 
 {
 	name "PHP"
-	extensions "php, php3"
+	extensions "php,php3"
 }
 
 {
@@ -59,11 +59,46 @@
 }
 
 {
+	name "Javascript"
+	extensions "js"
+}
+
+{
 	name "Visual Basic"
-	extensions "cls, vb, bas, vbw, vbp, frm"
+	extensions "cls,vb,bas,vbw,vbp,frm"
 }
 
 {
 	name "JSON"
 	extensions "json"
+}
+
+{
+	name "XML"
+	extensions "xml"
+}
+
+{
+	name "Pascal"
+	extensions "pas"
+}
+
+{
+	name "Rust"
+	extensions "rust"
+}
+
+{
+	name "Nim"
+	extensions "nim"
+}
+{
+
+	name "Markdown"
+	extensions "md,markdown"
+}
+
+{
+	name "Shell Script"
+	extensions "sh"
 }
