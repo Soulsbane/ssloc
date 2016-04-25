@@ -102,3 +102,23 @@
 	name "Shell Script"
 	extensions "sh"
 }
+
+{
+	name "Scala"
+	extensions "scala"
+}
+
+{
+	name "Assembly"
+	extensions "as,s"
+}
+
+{
+	name "Golang"
+	extensions "go"
+}
+
+{
+	name "Makefile"
+	extensions "mk,makefile"
+}
