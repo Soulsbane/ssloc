@@ -85,7 +85,7 @@
 
 {
 	name "Rust"
-	extensions "rust"
+	extensions "rs"
 }
 
 {
