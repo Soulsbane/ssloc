@@ -117,7 +117,7 @@ void scan()
 					{
 						import std.algorithm : canFind;
 
-						if(line.startsWith("//"))
+						if(line.startsWith("//")) // FIXME Use commentStart length the use a slice instead.
 						{
 							++data.comments;
 							++_TotalCommentLines;
@@ -186,6 +186,7 @@ void main()
 		writeDivider;
 	}
 
+	writeln;
 	writeField("Total", Fields.language);
 	writeField(_TotalNumberOfFiles, Fields.files);
 	writeField(_TotalBlankLines, Fields.blank);
