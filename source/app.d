@@ -144,7 +144,10 @@ void scan()
 			}
 			else
 			{
-				debug writeln("Unknown extension, ", fileExtension, " found!");
+				if(!fileExtension.empty)
+				{
+					debug writeln("Unknown extension, ", fileExtension, " found!");
+				}
 			}
 		}
 
