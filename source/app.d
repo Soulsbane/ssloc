@@ -17,6 +17,11 @@ enum Fields
 	comments = 10
 }
 
+size_t _TotalBlankLines;
+size_t _TotalCodeLines;
+size_t _TotalCommentLines;
+size_t _TotalNumberOfFiles;
+
 struct LanguageData
 {
 	size_t files;
@@ -111,19 +116,22 @@ void scan()
 					if(!line.empty)
 					{
 						import std.algorithm : canFind;
-						
+
 						if(line.startsWith("//"))
 						{
 							++data.comments;
+							++_TotalCommentLines;
 						}
 						else
 						{
 							++data.code;
+							++_TotalCodeLines;
 						}
 					}
 					else
 					{
 						++data.blank;
+						++_TotalBlankLines;
 					}
 				}
 
@@ -133,8 +141,9 @@ void scan()
 			{
 				debug writeln("Unknown extension, ", fileExtension, " found!");
 			}
-
 		}
+
+		++_TotalNumberOfFiles;
 	}
 }
 
