@@ -182,4 +182,12 @@ void main()
 		writeField(data.code, Fields.code);
 		writeDivider;
 	}
+
+	writeField("Total", Fields.language);
+	writeField(_TotalNumberOfFiles, Fields.files);
+	writeField(_TotalBlankLines, Fields.blank);
+	writeField(_TotalCommentLines, Fields.comments);
+	writeField(_TotalCodeLines, Fields.code);
+	writeDivider;
+	writeln;
 }
