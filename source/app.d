@@ -116,16 +116,26 @@ void scan()
 					if(!line.empty)
 					{
 						import std.algorithm : canFind;
+<<<<<<< HEAD
 
 						if(line.startsWith("//"))
 						{
 							++data.comments;
 							++_TotalCommentLines;
+=======
+						
+						if(line.startsWith("//"))
+						{
+							++data.comments;
+>>>>>>> 16ab099b6873071f4a619e03e995d666f40d36f1
 						}
 						else
 						{
 							++data.code;
+<<<<<<< HEAD
 							++_TotalCodeLines;
+=======
+>>>>>>> 16ab099b6873071f4a619e03e995d666f40d36f1
 						}
 					}
 					else
