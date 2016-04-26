@@ -103,11 +103,23 @@ void scan()
 
 				++data.files;
 
-				foreach(line; lines)
+				foreach(rawLine; lines)
 				{
+					import std.string : strip, chompPrefix;
+					immutable string line = rawLine.strip.chompPrefix("\t");
+
 					if(!line.empty)
 					{
-						++data.code;
+						import std.algorithm : canFind;
+						
+						if(line.startsWith("//"))
+						{
+							++data.comments;
+						}
+						else
+						{
+							++data.code;
+						}
 					}
 					else
 					{
