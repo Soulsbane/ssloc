@@ -1,8 +1,14 @@
 import std.stdio : writeln, write;
-import std.string : join, removechars, lineSplitter, empty;
+import std.string : join, removechars, lineSplitter, empty, strip, chompPrefix;
 import std.range : repeat;
-import std.file : dirEntries, DirEntry, getcwd, SpanMode;
-import std.algorithm : filter, startsWith;
+import std.file : dirEntries, DirEntry, getcwd, SpanMode, readText;
+import std.algorithm : filter, startsWith, canFind;
+import std.path : baseName, buildNormalizedPath, extension, pathSplitter;
+import std.conv : to;
+import std.parallelism : parallel;
+import std.array : array;
+import std.utf : UTFException;
+import std.exception : ifThrown;
 
 import filetype;
 
@@ -40,8 +46,6 @@ void writeDivider()
 
 void writeField(T)(const T value, Fields field)
 {
-	import std.conv : to;
-
 	immutable string strValue = value.to!string;
 	immutable size_t length = strValue.length;
 	size_t numberOfSpaces = field - length;
@@ -71,10 +75,6 @@ void writeHeader()
 
 void scan()
 {
-	import std.parallelism : parallel;
-	import std.file : getcwd, dirEntries, SpanMode, readText;
-	import std.array : array;
-
 	auto files = getcwd.dirEntries(SpanMode.depth)
 		.filter!(a => (!isHiddenFileOrDir(a)))
 		.array
@@ -83,14 +83,8 @@ void scan()
 	//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
 	foreach(e; files)
 	{
-		import std.path : baseName, buildNormalizedPath, extension;
-
 		auto name = buildNormalizedPath(e.name);
 		immutable string fileExtension = e.name.baseName.extension.removechars(".");
-
-		import std.utf : UTFException;
-		import std.exception : ifThrown;
-
 		immutable string text = readText(name).ifThrown!UTFException("");
 		auto lines = text.lineSplitter();
 		immutable string language = getLanguageFromFileExtension(fileExtension);
@@ -108,13 +102,10 @@ void scan()
 
 			foreach(rawLine; lines)
 			{
-				import std.string : strip, chompPrefix;
 				immutable string line = rawLine.strip.chompPrefix("\t");
 
 				if(!line.empty)
 				{
-					import std.algorithm : canFind;
-
 					if(line.startsWith("//")) // FIXME Use commentStart length the use a slice instead.
 					{
 						++data.comments;
@@ -154,7 +145,6 @@ void scan()
 
 bool isHiddenFileOrDir(DirEntry entry)
 {
-	import std.path : pathSplitter;
 	auto dirParts = entry.name.pathSplitter;
 
 	foreach(dirPart; dirParts)
