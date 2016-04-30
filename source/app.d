@@ -88,66 +88,63 @@ void scan()
 		auto name = buildNormalizedPath(e.name);
 		immutable string fileExtension = e.name.baseName.extension.removechars(".");
 
-		if(e.isFile && !e.name.baseName.startsWith("."))
+		import std.utf : UTFException;
+		import std.exception : ifThrown;
+
+		immutable string text = readText(name).ifThrown!UTFException("");
+		auto lines = text.lineSplitter();
+		immutable string language = getLanguageFromFileExtension(fileExtension);
+
+		if(language != "Unknown")
 		{
-			import std.utf : UTFException;
-			import std.exception : ifThrown;
+			LanguageData data;
 
-			immutable string text = readText(name).ifThrown!UTFException("");
-			auto lines = text.lineSplitter();
-			immutable string language = getLanguageFromFileExtension(fileExtension);
-
-			if(language != "Unknown")
+			if(language in _ParseResults)
 			{
-				LanguageData data;
+				data = _ParseResults[language];
+			}
 
-				if(language in _ParseResults)
+			++data.files;
+
+			foreach(rawLine; lines)
+			{
+				import std.string : strip, chompPrefix;
+				immutable string line = rawLine.strip.chompPrefix("\t");
+
+				if(!line.empty)
 				{
-					data = _ParseResults[language];
-				}
+					import std.algorithm : canFind;
 
-				++data.files;
-
-				foreach(rawLine; lines)
-				{
-					import std.string : strip, chompPrefix;
-					immutable string line = rawLine.strip.chompPrefix("\t");
-
-					if(!line.empty)
+					if(line.startsWith("//")) // FIXME Use commentStart length the use a slice instead.
 					{
-						import std.algorithm : canFind;
+						++data.comments;
+						++_TotalCommentLines;
+					}
 
-						if(line.startsWith("//")) // FIXME Use commentStart length the use a slice instead.
-						{
-							++data.comments;
-							++_TotalCommentLines;
-						}
-
-						if(line.startsWith("//"))
-						{
-							++data.comments;
-						}
-						else
-						{
-							++data.code;
-							++_TotalCodeLines;
-						}
+					if(line.startsWith("//"))
+					{
+						++data.comments;
 					}
 					else
 					{
-						++data.blank;
-						++_TotalBlankLines;
+						++data.code;
+						++_TotalCodeLines;
 					}
 				}
-
-				_ParseResults[language] = data;
-			}
-			else
-			{
-				if(!fileExtension.empty)
+				else
 				{
-					debug writeln("Unknown extension, ", fileExtension, " found!");
+					++data.blank;
+					++_TotalBlankLines;
 				}
+			}
+
+			_ParseResults[language] = data;
+		}
+		else
+		{
+			if(!fileExtension.empty)
+			{
+				debug writeln("Unknown extension, ", fileExtension, " found!");
 			}
 		}
 
