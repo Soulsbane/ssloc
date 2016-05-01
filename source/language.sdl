@@ -1,6 +1,7 @@
 {
 	name "DLang"
 	extensions "d,di,ddoc"
+	singleLineComment "//"
 }
 
 {

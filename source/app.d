@@ -106,15 +106,10 @@ void scan()
 
 				if(!line.empty)
 				{
-					if(line.startsWith("//")) // FIXME Use commentStart length the use a slice instead.
+					if(isSingleLineComment(line, language))
 					{
 						++data.comments;
 						++_TotalCommentLines;
-					}
-
-					if(line.startsWith("//"))
-					{
-						++data.comments;
 					}
 					else
 					{
