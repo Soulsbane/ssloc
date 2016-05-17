@@ -27,6 +27,8 @@ size_t _TotalBlankLines;
 size_t _TotalCodeLines;
 size_t _TotalCommentLines;
 size_t _TotalNumberOfFiles;
+size_t _TotalNumberOfLines;
+size_t _TotalNumberOfUnknowns;
 
 struct LanguageData
 {
@@ -91,7 +93,7 @@ void scan()
 		{
 			LanguageData data;
 			immutable string text = readText(name).ifThrown!UTFException("");
-			auto lines = text.lineSplitter();
+			auto lines = text.lineSplitter().array;
 
 			if(language in _ParseResults)
 			{
@@ -99,6 +101,7 @@ void scan()
 			}
 
 			++data.files;
+			_TotalNumberOfLines = _TotalNumberOfLines + lines.length;
 
 			foreach(rawLine; lines)
 			{
@@ -131,6 +134,7 @@ void scan()
 			if(!fileExtension.empty)
 			{
 				debug writeln("Unknown extension, ", fileExtension, " found!");
+				++_TotalNumberOfUnknowns;
 			}
 		}
 
@@ -156,6 +160,8 @@ bool isHiddenFileOrDir(DirEntry entry)
 void main()
 {
 	scan();
+	writeln("Total lines processed: ", _TotalNumberOfLines);
+	writeln("Total files ignored: ", _TotalNumberOfUnknowns); // TODO: Maybe add a list of ignored extensions?
 	writeHeader;
 
 	foreach(key, data; _ParseResults)
