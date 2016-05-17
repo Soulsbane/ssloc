@@ -85,13 +85,13 @@ void scan()
 	{
 		auto name = buildNormalizedPath(e.name);
 		immutable string fileExtension = e.name.baseName.extension.removechars(".");
-		immutable string text = readText(name).ifThrown!UTFException("");
-		auto lines = text.lineSplitter();
 		immutable string language = getLanguageFromFileExtension(fileExtension);
 
 		if(language != "Unknown")
 		{
 			LanguageData data;
+			immutable string text = readText(name).ifThrown!UTFException("");
+			auto lines = text.lineSplitter();
 
 			if(language in _ParseResults)
 			{
