@@ -9,6 +9,7 @@ import std.parallelism : parallel;
 import std.array : array;
 import std.utf : UTFException;
 import std.exception : ifThrown;
+import core.time : MonoTime;
 
 import filetype;
 
@@ -159,7 +160,15 @@ bool isHiddenFileOrDir(DirEntry entry)
 
 void main()
 {
+	auto startTime = MonoTime.currTime;
+
 	scan();
+
+	auto endTime = MonoTime.currTime;
+	auto timeTaken = endTime - startTime;
+
+	writeln;
+	writeln("Time taken: ", timeTaken);
 	writeln("Total lines processed: ", _TotalNumberOfLines);
 	writeln("Total files ignored: ", _TotalNumberOfUnknowns); // TODO: Maybe add a list of ignored extensions?
 	writeHeader;
