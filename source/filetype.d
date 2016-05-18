@@ -5,7 +5,7 @@ import std.string : removechars, lineSplitter;
 import std.container : Array;
 import std.regex : Regex, ctRegex, matchFirst;
 import std.parallelism : parallel;
-import std.algorithm : filter, startsWith;
+import std.algorithm : filter, startsWith, canFind;
 
 import raijin.types.records;
 
@@ -16,6 +16,8 @@ struct Record
 	string name;
 	string extensions;
 	string singleLineComment;
+	string multiLineCommentOpen;
+	string multiLineCommentClose;
 }
 
 alias RecordArray = Array!Record;
@@ -25,6 +27,37 @@ shared static this()
 {
 	RecordCollector!Record collector;
 	_DatArray = collector.parse(LanguageData);
+}
+
+enum MultiLineCommentType { Non, Open, Close }
+
+MultiLineCommentType isMultiLineComment(const string line, const string language)
+{
+	auto found = _DatArray[].filter!(a => a.name == language);
+
+	if(!found.empty)
+	{
+		immutable string commentOpen = found.front.multiLineCommentOpen;
+		immutable string commentClose = found.front.multiLineCommentClose;
+
+		if(commentOpen.length && line.startsWith(commentOpen))
+		{
+			return MultiLineCommentType.Open;
+		}
+
+		if(commentClose.length && line.canFind(commentClose))
+		{
+			return MultiLineCommentType.Close;
+		}
+	}
+
+	return MultiLineCommentType.Non;
+	/*if(singleLineComment.length && line.startsWith(singleLineComment))
+	{
+		return true;
+	}
+
+	return false;*/
 }
 
 bool isSingleLineComment(const string line, const string language)

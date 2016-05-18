@@ -104,13 +104,39 @@ void scan()
 			++data.files;
 			_TotalNumberOfLines = _TotalNumberOfLines + lines.length;
 
+			bool inCommentBlock;
+
 			foreach(rawLine; lines)
 			{
 				immutable string line = rawLine.strip.chompPrefix("\t");
 
+				//if(!line.empty || inCommentBlock) // Maybe as an option to count blanks if inside comment block
 				if(!line.empty)
 				{
 					if(isSingleLineComment(line, language))
+					{
+						++data.comments;
+						++_TotalCommentLines;
+					}
+					else if(auto commentType = isMultiLineComment(line, language))
+					{
+						if(commentType == MultiLineCommentType.Open)
+						{
+							++data.comments;
+							++_TotalCommentLines;
+
+							inCommentBlock = true;
+						}
+
+						if(commentType == MultiLineCommentType.Close)
+						{
+							++data.comments;
+							++_TotalCommentLines;
+
+							inCommentBlock = false;
+						}
+					}
+					else if(inCommentBlock)
 					{
 						++data.comments;
 						++_TotalCommentLines;
