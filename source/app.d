@@ -11,6 +11,8 @@ import std.utf : UTFException;
 import std.exception : ifThrown;
 import core.time : MonoTime;
 
+import raijin.utils.string : formatNumber;
+
 import filetype;
 
 enum COLUMN_WIDTH = 60;
@@ -195,8 +197,9 @@ void main()
 
 	writeln;
 	writeln("Time taken: ", timeTaken);
-	writeln("Total lines processed: ", _TotalNumberOfLines);
-	writeln("Total files ignored: ", _TotalNumberOfUnknowns); // TODO: Maybe add a list of ignored extensions?
+	writeln("Total lines processed: ", _TotalNumberOfLines.formatNumber);
+	writeln("Total files ignored: ", _TotalNumberOfUnknowns.formatNumber);
+	 // TODO: Maybe add a list of ignored extensions as a command line argument.?
 	writeHeader;
 
 	foreach(key, data; _ParseResults)
