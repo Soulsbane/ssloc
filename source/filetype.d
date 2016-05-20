@@ -52,12 +52,6 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 	}
 
 	return MultiLineCommentType.Non;
-	/*if(singleLineComment.length && line.startsWith(singleLineComment))
-	{
-		return true;
-	}
-
-	return false;*/
 }
 
 bool isSingleLineComment(const string line, const string language)
