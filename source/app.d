@@ -51,18 +51,17 @@ void writeDivider()
 
 void writeField(T)(const T value, Fields field)
 {
-	immutable string strValue = value.to!string;
-	immutable size_t length = strValue.length;
-	size_t numberOfSpaces = field - length;
+	immutable string strValue = value.to!string.formatNumber;
+	immutable size_t numberOfSpaces = field - strValue.length;
 
 	if(field == Fields.code)
 	{
 		write(" ".repeat(numberOfSpaces).join);
-		write(value);
+		write(strValue);
 	}
 	else
 	{
-		write(value);
+		write(strValue);
 		write(" ".repeat(numberOfSpaces).join);
 	}
 }
