@@ -15,15 +15,15 @@ import raijin.utils.string : formatNumber;
 
 import filetype;
 
-enum COLUMN_WIDTH = 60;
+enum COLUMN_WIDTH = 80;
 
 enum Fields
 {
 	language = 20,
-	files = 10,
-	code = 10,
-	blank = 10,
-	comments = 10
+	files = 15,
+	code = 15,
+	blank = 15,
+	comments = 15
 }
 
 size_t _TotalBlankLines;
