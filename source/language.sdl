@@ -9,6 +9,9 @@
 {
 	name "Lua"
 	extensions "lua"
+	singleLineComment "--"
+	multiLineCommentOpen "-[["
+	multiLineCommentClose "--]]"
 }
 
 {
@@ -19,26 +22,35 @@
 {
 	name "Python"
 	extensions "py"
+	singleLineComment "#"
 }
 
 {
 	name "C/C++"
 	extensions "c,cpp,cxx,h,hh,hpp"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
 	name "Ruby"
 	extensions "rb"
+	singleLineComment "#"
 }
 
 {
 	name "Perl"
 	extensions "pl,cgi"
+	singleLineComment "#"
 }
 
 {
 	name "C#"
 	extensions "cs"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
@@ -49,6 +61,9 @@
 {
 	name "PHP"
 	extensions "php,php3"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
@@ -59,11 +74,17 @@
 {
 	name "Java"
 	extensions "java"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
 	name "Javascript"
 	extensions "js"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
@@ -119,6 +140,9 @@
 {
 	name "Golang"
 	extensions "go"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
