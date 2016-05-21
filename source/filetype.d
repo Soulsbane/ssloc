@@ -29,7 +29,7 @@ shared static this()
 	_DatArray = collector.parse(LanguageData);
 }
 
-enum MultiLineCommentType { Non, Open, Close }
+enum MultiLineCommentType { None, Open, Close }
 
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
@@ -51,7 +51,7 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 		}
 	}
 
-	return MultiLineCommentType.Non;
+	return MultiLineCommentType.None;
 }
 
 bool isSingleLineComment(const string line, const string language)
