@@ -7,7 +7,7 @@ import std.regex : Regex, ctRegex, matchFirst;
 import std.parallelism : parallel;
 import std.algorithm : filter, startsWith, canFind;
 
-import raijin.types.records;
+import textrecords;
 
 enum LanguageData = import("language.sdl");
 
@@ -25,7 +25,7 @@ RecordArray _DatArray;
 
 shared static this()
 {
-	RecordCollector!Record collector;
+	TextRecords!Record collector;
 	_DatArray = collector.parse(LanguageData);
 }
 
