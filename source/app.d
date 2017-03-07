@@ -1,15 +1,5 @@
-import std.stdio : writeln, write;
-import std.string : join, removechars, lineSplitter, empty, strip, chompPrefix;
-import std.range : repeat;
-import std.file : dirEntries, DirEntry, getcwd, SpanMode, readText;
-import std.algorithm : filter, startsWith, canFind;
-import std.path : baseName, buildNormalizedPath, extension, pathSplitter;
-import std.conv : to;
-import std.parallelism : parallel;
-import std.array : array;
-import std.utf : UTFException;
-import std.exception : ifThrown;
-import core.time : MonoTime;
+import std.stdio, std.string, std.file, std.algorithm, std.path, std.exception;
+import std.range, std.conv, std.parallelism, std.array, std.utf, core.time;
 
 import raijin.utils.string : formatNumber;
 
