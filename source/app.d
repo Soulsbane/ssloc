@@ -70,9 +70,9 @@ void writeHeader()
 void scan()
 {
 	auto files = getcwd.dirEntries(SpanMode.depth)
-		.filter!(a => (!isHiddenFileOrDir(a)))
-		.array
-		.filter!(a => (a.isFile));
+		.filter!(a => (!isHiddenFileOrDir(a) && a.isFile));
+		//.array;
+		//.filter!(a => (a.isFile));
 
 	//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
 	foreach(e; files)
