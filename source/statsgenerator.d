@@ -25,7 +25,7 @@ struct StatsGenerator
 		//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
 		foreach(e; files)
 		{
-			auto name = buildNormalizedPath(e.name);
+			immutable string name = buildNormalizedPath(e.name);
 			immutable string fileExtension = e.name.baseName.extension.removechars(".");
 			immutable string language = getLanguageFromFileExtension(fileExtension);
 
