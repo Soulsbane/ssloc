@@ -1,7 +1,6 @@
 module statsformatter;
-import std.stdio, std.string, std.file, std.algorithm, std.path, std.exception;
-import std.range, std.conv, std.parallelism, std.array, std.utf, core.time;
 
+import std.stdio, std.algorithm, std.conv, std.range;
 import raijin.utils.string : formatNumber;
 
 enum COLUMN_WIDTH = 80;

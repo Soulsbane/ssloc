@@ -1,6 +1,7 @@
 module statsgenerator;
-import std.stdio, std.string, std.file, std.algorithm, std.path, std.exception;
-import std.range, std.conv, std.parallelism, std.array, std.utf, core.time;
+
+import std.stdio, std.string, std.file, std.algorithm, std.path;
+import std.array, std.utf, core.time, std.exception;
 
 import raijin.utils.string : formatNumber;
 
@@ -142,7 +143,6 @@ private:
 	size_t _TotalNumberOfFiles;
 	size_t _TotalNumberOfLines;
 	size_t _TotalNumberOfUnknowns;
-
 
 	LanguageData[string] _ParseResults;
 }

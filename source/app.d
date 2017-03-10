@@ -1,5 +1,4 @@
-import std.stdio, std.string, std.file, std.algorithm, std.path, std.exception;
-import std.range, std.conv, std.parallelism, std.array, std.utf, core.time;
+import std.stdio, core.time;
 
 import filetype;
 import statsformatter;
