@@ -1,9 +1,7 @@
 module statsgenerator;
 
 import std.stdio, std.string, std.file, std.algorithm, std.path;
-import std.array, std.utf, core.time, std.exception;
-
-import raijin.utils.string : formatNumber;
+import std.array, std.utf, core.time, std.exception, std.conv;
 
 import filetype;
 import statsformatter;

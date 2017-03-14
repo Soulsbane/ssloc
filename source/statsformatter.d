@@ -1,7 +1,6 @@
 module statsformatter;
 
 import std.stdio, std.algorithm, std.conv, std.range;
-import raijin.utils.string : formatNumber;
 
 enum COLUMN_WIDTH = 80;
 
@@ -14,6 +13,22 @@ enum Fields
 	comments = 15
 }
 
+string formatNumber(T)(T number)
+{
+	import std.regex : regex, replaceAll;
+
+	auto re = regex(`(?<=\d)(?=(\d\d\d)+\b)`,"g");
+
+	static if(is(typeof(T) == string))
+	{
+		return number.replaceAll(re, ",");
+	}
+	else
+	{
+		return number.to!string.replaceAll(re, ",");
+	}
+}
+
 void writeDivider()
 {
 	writeln;
@@ -22,7 +37,7 @@ void writeDivider()
 
 void writeField(T)(const T value, Fields field)
 {
-	immutable string strValue = value.to!string.formatNumber;
+	immutable string strValue = value.formatNumber;
 	immutable size_t numberOfSpaces = field - strValue.length;
 
 	if(field == Fields.code)
