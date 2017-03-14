@@ -1,7 +1,7 @@
 module statsgenerator;
 
 import std.stdio, std.string, std.file, std.algorithm, std.path;
-import std.array, std.utf, core.time, std.exception, std.conv;
+import std.array, std.utf, core.time, std.exception, std.conv, std.typecons;
 
 import filetype;
 import statsformatter;
@@ -119,19 +119,46 @@ struct StatsGenerator
 
 	void outputResults()
 	{
+		immutable bool sortByLanguage = true;
+
 		writeln("Total lines processed: ", lineTotals_.numLines.formatNumber);
 		writeln("Total files ignored: ", lineTotals_.numUnknowns.formatNumber);
 		 // TODO: Maybe add a list of ignored extensions as a command line argument.?
 		writeHeader;
 
-		foreach(key, currentLanguageTotals; languageTotals_)
+		if(sortByLanguage)
 		{
-			writeField(key, Fields.language);
-			writeField(currentLanguageTotals.files, Fields.files);
-			writeField(currentLanguageTotals.blank, Fields.blank);
-			writeField(currentLanguageTotals.comments, Fields.comments);
-			writeField(currentLanguageTotals.code, Fields.code);
-			writeDivider;
+			Tuple!(string, LanguageTotals)[] pairs;
+
+			foreach(pair; languageTotals_.byPair)
+			{
+				pairs ~= pair;
+			}
+
+			sort!q{ a[0] < b[0] }(pairs);
+
+			foreach(index, currentLanguageTotals; pairs)
+			{
+				// The key is index 0 and value(LanguageTotals structure is at index 1).
+				writeField(currentLanguageTotals[0], Fields.language);
+				writeField(currentLanguageTotals[1].files, Fields.files);
+				writeField(currentLanguageTotals[1].blank, Fields.blank);
+				writeField(currentLanguageTotals[1].comments, Fields.comments);
+				writeField(currentLanguageTotals[1].code, Fields.code);
+				writeDivider;
+			}
+		}
+		else
+		{
+			foreach(key, currentLanguageTotals; languageTotals_)
+			{
+				writeField(key, Fields.language);
+				writeField(currentLanguageTotals.files, Fields.files);
+				writeField(currentLanguageTotals.blank, Fields.blank);
+				writeField(currentLanguageTotals.comments, Fields.comments);
+				writeField(currentLanguageTotals.code, Fields.code);
+				writeDivider;
+			}
 		}
 
 		writeln;
