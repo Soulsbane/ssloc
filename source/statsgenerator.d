@@ -8,12 +8,22 @@ import raijin.utils.string : formatNumber;
 import filetype;
 import statsformatter;
 
-struct LanguageData
+struct LanguageTotals
 {
 	size_t files;
 	size_t code;
 	size_t blank;
 	size_t comments;
+}
+
+struct LineTotals
+{
+	size_t numBlankLines;
+	size_t numCodeLines;
+	size_t numCommentLines;
+	size_t numFiles;
+	size_t numLines;
+	size_t numUnknowns;
 }
 
 struct StatsGenerator
@@ -32,17 +42,17 @@ struct StatsGenerator
 
 			if(language != "Unknown")
 			{
-				LanguageData data;
+				LanguageTotals currentLanguageTotals;
 				immutable string text = readText(name).ifThrown!UTFException("");
 				auto lines = text.lineSplitter().array;
 
-				if(language in _ParseResults)
+				if(language in languageTotals_)
 				{
-					data = _ParseResults[language];
+					currentLanguageTotals = languageTotals_[language];
 				}
 
-				++data.files;
-				_TotalNumberOfLines = _TotalNumberOfLines + lines.length;
+				++currentLanguageTotals.files;
+				lineTotals_.numLines = lineTotals_.numLines + lines.length;
 
 				bool inCommentBlock;
 
@@ -55,96 +65,90 @@ struct StatsGenerator
 					{
 						if(isSingleLineComment(line, language))
 						{
-							++data.comments;
-							++_TotalCommentLines;
+							++currentLanguageTotals.comments;
+							++lineTotals_.numCommentLines;
 						}
 						else if(auto commentType = isMultiLineComment(line, language))
 						{
 							if(commentType == MultiLineCommentType.Open)
 							{
-								++data.comments;
-								++_TotalCommentLines;
+								++currentLanguageTotals.comments;
+								++lineTotals_.numCommentLines;
 
 								inCommentBlock = true;
 							}
 
 							if(commentType == MultiLineCommentType.Close)
 							{
-								++data.comments;
-								++_TotalCommentLines;
+								++currentLanguageTotals.comments;
+								++lineTotals_.numCommentLines;
 
 								inCommentBlock = false;
 							}
 						}
 						else if(inCommentBlock)
 						{
-							++data.comments;
-							++_TotalCommentLines;
+							++currentLanguageTotals.comments;
+							++lineTotals_.numCommentLines;
 						}
 						else
 						{
-							++data.code;
-							++_TotalCodeLines;
+							++currentLanguageTotals.code;
+							++lineTotals_.numCodeLines;
 						}
 					}
 					else
 					{
-						++data.blank;
-						++_TotalBlankLines;
+						++currentLanguageTotals.blank;
+						++lineTotals_.numBlankLines;
 					}
 				}
 
-				_ParseResults[language] = data;
+				languageTotals_[language] = currentLanguageTotals;
 			}
 			else
 			{
 				if(!fileExtension.empty)
 				{
 					debug writeln("Unknown extension, ", fileExtension, " found!");
-					++_TotalNumberOfUnknowns;
+					++lineTotals_.numUnknowns;
 				}
 			}
 
-			++_TotalNumberOfFiles;
+			++lineTotals_.numFiles;
 		}
 	}
 
 	void outputResults()
 	{
-		writeln("Total lines processed: ", _TotalNumberOfLines.formatNumber);
-		writeln("Total files ignored: ", _TotalNumberOfUnknowns.formatNumber);
+		writeln("Total lines processed: ", lineTotals_.numLines.formatNumber);
+		writeln("Total files ignored: ", lineTotals_.numUnknowns.formatNumber);
 		 // TODO: Maybe add a list of ignored extensions as a command line argument.?
 		writeHeader;
 
-		foreach(key, data; _ParseResults)
+		foreach(key, currentLanguageTotals; languageTotals_)
 		{
 			writeField(key, Fields.language);
-			writeField(data.files, Fields.files);
-			writeField(data.blank, Fields.blank);
-			writeField(data.comments, Fields.comments);
-			writeField(data.code, Fields.code);
+			writeField(currentLanguageTotals.files, Fields.files);
+			writeField(currentLanguageTotals.blank, Fields.blank);
+			writeField(currentLanguageTotals.comments, Fields.comments);
+			writeField(currentLanguageTotals.code, Fields.code);
 			writeDivider;
 		}
 
 		writeln;
 		writeField("Total", Fields.language);
-		writeField(_TotalNumberOfFiles, Fields.files);
-		writeField(_TotalBlankLines, Fields.blank);
-		writeField(_TotalCommentLines, Fields.comments);
-		writeField(_TotalCodeLines, Fields.code);
+		writeField(lineTotals_.numFiles, Fields.files);
+		writeField(lineTotals_.numBlankLines, Fields.blank);
+		writeField(lineTotals_.numCommentLines, Fields.comments);
+		writeField(lineTotals_.numCodeLines, Fields.code);
 		writeDivider;
 		writeln;
 	}
 
 private:
-	size_t _TotalBlankLines;
-	size_t _TotalCodeLines;
-	size_t _TotalCommentLines;
-	size_t _TotalNumberOfFiles;
-	size_t _TotalNumberOfLines;
-	size_t _TotalNumberOfUnknowns;
-
-	LanguageData[string] _ParseResults;
+	LineTotals lineTotals_;
+	LanguageTotals[string] languageTotals_;
 }
 
 bool isHiddenFileOrDir(DirEntry entry)
