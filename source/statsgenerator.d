@@ -117,10 +117,8 @@ struct StatsGenerator
 		}
 	}
 
-	void outputResults()
+	void outputResults(const bool sortByLanguage)
 	{
-		immutable bool sortByLanguage = true;
-
 		writeln("Total lines processed: ", lineTotals_.numLines.formatNumber);
 		writeln("Total files ignored: ", lineTotals_.numUnknowns.formatNumber);
 		 // TODO: Maybe add a list of ignored extensions as a command line argument.?
