@@ -12,13 +12,17 @@ void main(string[] arguments)
 	Options options;
 
 	options.sort = true;
-	generateGetOptCode!Options(arguments, options);
-	gen.scan();
+	immutable bool helpRequested = generateGetOptCode!Options(arguments, options);
 
-	auto endTime = MonoTime.currTime;
-	auto timeTaken = endTime - startTime;
+	if(!helpRequested)
+	{
+		gen.scan();
 
-	writeln;
-	writeln("Time taken: ", timeTaken);
-	gen.outputResults(options.sort);
+		auto endTime = MonoTime.currTime;
+		auto timeTaken = endTime - startTime;
+
+		writeln;
+		writeln("Time taken: ", timeTaken);
+		gen.outputResults(options.sort);
+	}
 }
