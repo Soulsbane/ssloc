@@ -16,12 +16,12 @@ struct LanguageTotals
 
 struct LineTotals
 {
-	size_t numBlankLines;
-	size_t numCodeLines;
-	size_t numCommentLines;
-	size_t numFiles;
-	size_t numLines;
-	size_t numUnknowns;
+	size_t blank;
+	size_t code;
+	size_t comment;
+	size_t files;
+	size_t lines;
+	size_t unknowns;
 }
 
 struct StatsGenerator
@@ -50,7 +50,7 @@ struct StatsGenerator
 				}
 
 				++currentLanguageTotals.files;
-				lineTotals_.numLines = lineTotals_.numLines + lines.length;
+				lineTotals_.lines = lineTotals_.lines + lines.length;
 
 				bool inCommentBlock;
 
@@ -64,14 +64,14 @@ struct StatsGenerator
 						if(isSingleLineComment(line, language))
 						{
 							++currentLanguageTotals.comments;
-							++lineTotals_.numCommentLines;
+							++lineTotals_.comment;
 						}
 						else if(auto commentType = isMultiLineComment(line, language))
 						{
 							if(commentType == MultiLineCommentType.Open)
 							{
 								++currentLanguageTotals.comments;
-								++lineTotals_.numCommentLines;
+								++lineTotals_.comment;
 
 								inCommentBlock = true;
 							}
@@ -79,7 +79,7 @@ struct StatsGenerator
 							if(commentType == MultiLineCommentType.Close)
 							{
 								++currentLanguageTotals.comments;
-								++lineTotals_.numCommentLines;
+								++lineTotals_.comment;
 
 								inCommentBlock = false;
 							}
@@ -87,24 +87,24 @@ struct StatsGenerator
 							if(commentType == MultiLineCommentType.OpenAndClose)
 							{
 								++currentLanguageTotals.comments;
-								++lineTotals_.numCommentLines;
+								++lineTotals_.comment;
 							}
 						}
 						else if(inCommentBlock)
 						{
 							++currentLanguageTotals.comments;
-							++lineTotals_.numCommentLines;
+							++lineTotals_.comment;
 						}
 						else
 						{
 							++currentLanguageTotals.code;
-							++lineTotals_.numCodeLines;
+							++lineTotals_.code;
 						}
 					}
 					else
 					{
 						++currentLanguageTotals.blank;
-						++lineTotals_.numBlankLines;
+						++lineTotals_.blank;
 					}
 				}
 
@@ -115,18 +115,18 @@ struct StatsGenerator
 				if(!fileExtension.empty)
 				{
 					debug writeln("Unknown extension, ", fileExtension, " found!");
-					++lineTotals_.numUnknowns;
+					++lineTotals_.unknowns;
 				}
 			}
 
-			++lineTotals_.numFiles;
+			++lineTotals_.files;
 		}
 	}
 
 	void outputResults(const bool sortByLanguage)
 	{
-		writeln("Total lines processed: ", lineTotals_.numLines.formatNumber);
-		writeln("Total files ignored: ", lineTotals_.numUnknowns.formatNumber);
+		writeln("Total lines processed: ", lineTotals_.lines.formatNumber);
+		writeln("Total files ignored: ", lineTotals_.unknowns.formatNumber);
 		 // TODO: Maybe add a list of ignored extensions as a command line argument.?
 		writeHeader;
 
@@ -167,10 +167,10 @@ struct StatsGenerator
 
 		writeln;
 		writeField("Total", Fields.language);
-		writeField(lineTotals_.numFiles, Fields.files);
-		writeField(lineTotals_.numBlankLines, Fields.blank);
-		writeField(lineTotals_.numCommentLines, Fields.comments);
-		writeField(lineTotals_.numCodeLines, Fields.code);
+		writeField(lineTotals_.files, Fields.files);
+		writeField(lineTotals_.blank, Fields.blank);
+		writeField(lineTotals_.comment, Fields.comments);
+		writeField(lineTotals_.code, Fields.code);
 		writeDivider;
 		writeln;
 	}
