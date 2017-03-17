@@ -29,7 +29,7 @@ shared static this()
 	_DatArray = collector.parse(LanguageData);
 }
 
-enum MultiLineCommentType { None, Open, Close }
+enum MultiLineCommentType { None, Open, Close, OpenAndClose }
 
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
@@ -39,6 +39,11 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 	{
 		immutable string commentOpen = found.front.multiLineCommentOpen;
 		immutable string commentClose = found.front.multiLineCommentClose;
+
+		if(commentOpen.length && (line.startsWith(commentOpen) && line.canFind(commentClose)))
+		{
+			return MultiLineCommentType.OpenAndClose;
+		}
 
 		if(commentOpen.length && line.startsWith(commentOpen))
 		{

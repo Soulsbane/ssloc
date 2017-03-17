@@ -83,6 +83,12 @@ struct StatsGenerator
 
 								inCommentBlock = false;
 							}
+
+							if(commentType == MultiLineCommentType.OpenAndClose)
+							{
+								++currentLanguageTotals.comments;
+								++lineTotals_.numCommentLines;
+							}
 						}
 						else if(inCommentBlock)
 						{
