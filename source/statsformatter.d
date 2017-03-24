@@ -2,7 +2,7 @@ module statsformatter;
 
 import std.stdio, std.algorithm, std.conv, std.range;
 
-enum COLUMN_WIDTH = 80;
+enum COLUMN_WIDTH = 95;
 
 enum Fields
 {
@@ -10,7 +10,8 @@ enum Fields
 	files = 15,
 	code = 15,
 	blank = 15,
-	comments = 15
+	comments = 15,
+	total = 15
 }
 
 string formatNumber(T)(T number)
@@ -40,10 +41,10 @@ void writeField(T)(const T value, Fields field)
 	immutable string strValue = value.formatNumber;
 	immutable size_t numberOfSpaces = field - strValue.length;
 
-	if(field == Fields.code)
+	if(field == Fields.total)
 	{
-		write(" ".repeat(numberOfSpaces).join);
 		write(strValue);
+		write(" ".repeat(numberOfSpaces).join);
 	}
 	else
 	{
@@ -60,5 +61,6 @@ void writeHeader()
 	writeField("Blank", Fields.blank);
 	writeField("Comments", Fields.comments);
 	writeField("Code", Fields.code);
+	writeField("Total", Fields.total);
 	writeDivider;
 }

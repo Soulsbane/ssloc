@@ -12,6 +12,7 @@ struct LanguageTotals
 	size_t code;
 	size_t blank;
 	size_t comments;
+	size_t total;
 }
 
 struct LineTotals
@@ -106,6 +107,8 @@ struct StatsGenerator
 						++currentLanguageTotals.blank;
 						++lineTotals_.blank;
 					}
+
+					++currentLanguageTotals.total;
 				}
 
 				languageTotals_[language] = currentLanguageTotals;
@@ -149,6 +152,7 @@ struct StatsGenerator
 				writeField(currentLanguageTotals[1].blank, Fields.blank);
 				writeField(currentLanguageTotals[1].comments, Fields.comments);
 				writeField(currentLanguageTotals[1].code, Fields.code);
+				writeField(currentLanguageTotals[1].total, Fields.total);
 				writeDivider;
 			}
 		}
@@ -161,6 +165,7 @@ struct StatsGenerator
 				writeField(currentLanguageTotals.blank, Fields.blank);
 				writeField(currentLanguageTotals.comments, Fields.comments);
 				writeField(currentLanguageTotals.code, Fields.code);
+				writeField(currentLanguageTotals.code, Fields.total);
 				writeDivider;
 			}
 		}
@@ -171,6 +176,7 @@ struct StatsGenerator
 		writeField(lineTotals_.blank, Fields.blank);
 		writeField(lineTotals_.comment, Fields.comments);
 		writeField(lineTotals_.code, Fields.code);
+		writeField(lineTotals_.lines, Fields.total);
 		writeDivider;
 		writeln;
 	}
