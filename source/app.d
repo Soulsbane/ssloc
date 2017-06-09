@@ -12,9 +12,13 @@ void main(string[] arguments)
 	Options options;
 
 	options.sort = true;
-	generateGetOptCode!Options(arguments, options);
+	immutable string message = generateGetOptCode!Options(arguments, options);
 
-	try
+	if(message != string.init)
+	{
+		writeln(message);
+	}
+	else
 	{
 		gen.scan();
 
@@ -24,9 +28,5 @@ void main(string[] arguments)
 		writeln;
 		writeln("Time taken: ", timeTaken);
 		gen.outputResults(options.sort);
-	}
-	catch(GetOptMixinException ex)
-	{
-		writeln(ex.msg);
 	}
 }
