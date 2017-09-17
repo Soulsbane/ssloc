@@ -5,6 +5,7 @@ import std.array, std.utf, core.time, std.exception, std.conv, std.typecons;
 
 import filetype;
 import statsformatter;
+import dstringutils.utils : removeChars;
 
 struct LanguageTotals
 {
@@ -36,7 +37,7 @@ struct StatsGenerator
 		foreach(e; files)
 		{
 			immutable string name = buildNormalizedPath(e.name);
-			immutable string fileExtension = e.name.baseName.extension.removechars(".");
+			immutable string fileExtension = e.name.baseName.extension.removeChars(".");
 			immutable string language = getLanguageFromFileExtension(fileExtension);
 
 			if(language != "Unknown")
