@@ -26,7 +26,7 @@ RecordArray _DatArray;
 shared static this()
 {
 	TextRecords!Record collector;
-	_DatArray = collector.parse(LanguageData);
+	_DatArray = collector.parseRaw(LanguageData);
 }
 
 enum MultiLineCommentType { None, Open, Close, OpenAndClose }
