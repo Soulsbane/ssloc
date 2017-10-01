@@ -43,7 +43,7 @@ struct StatsGenerator
 			{
 				LanguageTotals currentLanguageTotals;
 				immutable string text = readText(name).ifThrown!UTFException("");
-				auto lines = text.lineSplitter().array;
+				immutable auto lines = text.lineSplitter().array;
 
 				if(language in languageTotals_)
 				{
