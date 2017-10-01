@@ -23,7 +23,6 @@ struct LineTotals
 	size_t comment;
 	size_t files;
 	size_t lines;
-	size_t unknowns;
 }
 
 struct StatsGenerator
@@ -119,7 +118,7 @@ struct StatsGenerator
 				if(!fileExtension.empty)
 				{
 					debug writeln("Unknown extension, ", fileExtension, " found!");
-					++lineTotals_.unknowns;
+					++unknowns_;
 				}
 			}
 
@@ -130,7 +129,7 @@ struct StatsGenerator
 	void outputResults(const bool sortByLanguage)
 	{
 		writeln("Total lines processed: ", lineTotals_.lines.formatNumber);
-		writeln("Total files ignored: ", lineTotals_.unknowns.formatNumber);
+		writeln("Total files ignored: ", unknowns_.formatNumber);
 		 // TODO: Maybe add a list of ignored extensions as a command line argument.?
 		writeHeader;
 
@@ -184,6 +183,7 @@ struct StatsGenerator
 
 private:
 	LineTotals lineTotals_;
+	size_t unknowns_;
 	LanguageTotals[string] languageTotals_;
 }
 
