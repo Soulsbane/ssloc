@@ -9,18 +9,17 @@ import dstringutils.utils : removeChars;
 
 struct LanguageTotals
 {
-	size_t files;
-	size_t code;
-	size_t blank;
-	size_t comments;
 	size_t total;
+	LineTotals totals;
+
+	alias totals this;
 }
 
 struct LineTotals
 {
 	size_t blank;
 	size_t code;
-	size_t comment;
+	size_t comments;
 	size_t files;
 	size_t lines;
 }
@@ -65,14 +64,14 @@ struct StatsGenerator
 						if(isSingleLineComment(line, language))
 						{
 							++currentLanguageTotals.comments;
-							++lineTotals_.comment;
+							++lineTotals_.comments;
 						}
 						else if(auto commentType = isMultiLineComment(line, language))
 						{
 							if(commentType == MultiLineCommentType.Open)
 							{
 								++currentLanguageTotals.comments;
-								++lineTotals_.comment;
+								++lineTotals_.comments;
 
 								inCommentBlock = true;
 							}
@@ -80,7 +79,7 @@ struct StatsGenerator
 							if(commentType == MultiLineCommentType.Close)
 							{
 								++currentLanguageTotals.comments;
-								++lineTotals_.comment;
+								++lineTotals_.comments;
 
 								inCommentBlock = false;
 							}
@@ -88,13 +87,13 @@ struct StatsGenerator
 							if(commentType == MultiLineCommentType.OpenAndClose)
 							{
 								++currentLanguageTotals.comments;
-								++lineTotals_.comment;
+								++lineTotals_.comments;
 							}
 						}
 						else if(inCommentBlock)
 						{
 							++currentLanguageTotals.comments;
-							++lineTotals_.comment;
+							++lineTotals_.comments;
 						}
 						else
 						{
@@ -174,7 +173,7 @@ struct StatsGenerator
 		writeField("Total", Fields.language);
 		writeField(lineTotals_.files, Fields.files);
 		writeField(lineTotals_.blank, Fields.blank);
-		writeField(lineTotals_.comment, Fields.comments);
+		writeField(lineTotals_.comments, Fields.comments);
 		writeField(lineTotals_.code, Fields.code);
 		writeField(lineTotals_.lines, Fields.total);
 		writeDivider;
