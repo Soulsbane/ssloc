@@ -9,7 +9,7 @@ import std.algorithm : filter, startsWith, canFind;
 
 import textrecords;
 
-enum LanguageData = import("language.sdl");
+enum LanguageData = import("language.tr");
 
 struct Record
 {
