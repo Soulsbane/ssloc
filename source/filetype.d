@@ -1,11 +1,10 @@
 module filetype;
 
-import std.container : Array;
 import std.string : removechars, lineSplitter;
 import std.container : Array;
 import std.regex : Regex, ctRegex, matchFirst;
 import std.parallelism : parallel;
-import std.algorithm : filter, startsWith, canFind;
+import std.algorithm : startsWith, canFind;
 
 import textrecords;
 
@@ -22,23 +21,23 @@ struct Record
 
 alias RecordArray = Array!Record;
 RecordArray _DatArray;
+TextRecords!Record _LanguageRecords;
 
 shared static this()
 {
-	TextRecords!Record collector;
-	_DatArray = collector.parseRaw(LanguageData);
+	_DatArray = _LanguageRecords.parseRaw(LanguageData);
 }
 
 enum MultiLineCommentType { None, Open, Close, OpenAndClose }
 
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
-	auto found = _DatArray[].filter!(a => a.languageName == language);
+	auto found = _LanguageRecords.findByLanguageName(language);
 
-	if(!found.empty)
+	if(found.length)
 	{
-		immutable string commentOpen = found.front.multiLineCommentOpen;
-		immutable string commentClose = found.front.multiLineCommentClose;
+		immutable string commentOpen = found[0].multiLineCommentOpen;
+		immutable string commentClose = found[0].multiLineCommentClose;
 
 		if(commentOpen.length && (line.startsWith(commentOpen) && line.canFind(commentClose)))
 		{
@@ -62,11 +61,11 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 bool isSingleLineComment(const string line, const string language)
 {
 	string singleLineComment;
-	auto found = _DatArray[].filter!(a => a.languageName == language);
+	auto found = _LanguageRecords.findByLanguageName(language);
 
-	if(!found.empty)
+	if(found.length)
 	{
-		singleLineComment = found.front.singleLineComment;
+		singleLineComment = found[0].singleLineComment;
 	}
 
 	if(singleLineComment.length && line.startsWith(singleLineComment))
