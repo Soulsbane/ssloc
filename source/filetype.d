@@ -13,7 +13,7 @@ enum LanguageData = import("language.tr");
 
 struct Record
 {
-	string name;
+	string languageName;
 	string extensions;
 	string singleLineComment;
 	string multiLineCommentOpen;
@@ -33,7 +33,7 @@ enum MultiLineCommentType { None, Open, Close, OpenAndClose }
 
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
-	auto found = _DatArray[].filter!(a => a.name == language);
+	auto found = _DatArray[].filter!(a => a.languageName == language);
 
 	if(!found.empty)
 	{
@@ -62,7 +62,7 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 bool isSingleLineComment(const string line, const string language)
 {
 	string singleLineComment;
-	auto found = _DatArray[].filter!(a => a.name == language);
+	auto found = _DatArray[].filter!(a => a.languageName == language);
 
 	if(!found.empty)
 	{
@@ -88,7 +88,7 @@ string getLanguageFromFileExtension(const string extension)
 		{
 			if(part == extension)
 			{
-				return entry.name;
+				return entry.languageName;
 			}
 		}
 	}
