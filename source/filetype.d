@@ -19,7 +19,6 @@ struct Record
 	string multiLineCommentClose;
 }
 
-alias RecordArray = Array!Record;
 TextRecords!Record _LanguageRecords;
 
 shared static this()
