@@ -1,11 +1,6 @@
 module filetype;
 
-import std.string : removechars, lineSplitter;
-import std.container : Array;
-import std.regex : Regex, ctRegex, matchFirst;
-import std.parallelism : parallel;
 import std.algorithm : startsWith, canFind;
-
 import textrecords;
 
 enum LanguageData = import("language.tr");
