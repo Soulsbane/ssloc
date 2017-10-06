@@ -1,5 +1,5 @@
 {
-	name "DLang"
+	languageName "DLang"
 	extensions "d,di,ddoc"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -7,7 +7,7 @@
 }
 
 {
-	name "Lua"
+	languageName "Lua"
 	extensions "lua"
 	singleLineComment "--"
 	multiLineCommentOpen "-[["
@@ -15,18 +15,18 @@
 }
 
 {
-	name "SDLang"
+	languageName "SDLang"
 	extensions "sdl"
 }
 
 {
-	name "Python"
+	languageName "Python"
 	extensions "py"
 	singleLineComment "#"
 }
 
 {
-	name "C/C++"
+	languageName "C/C++"
 	extensions "c,cpp,cxx,h,hh,hpp"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -34,19 +34,19 @@
 }
 
 {
-	name "Ruby"
+	languageName "Ruby"
 	extensions "rb"
 	singleLineComment "#"
 }
 
 {
-	name "Perl"
+	languageName "Perl"
 	extensions "pl,cgi"
 	singleLineComment "#"
 }
 
 {
-	name "C#"
+	languageName "C#"
 	extensions "cs"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -54,12 +54,12 @@
 }
 
 {
-	name "HTML"
+	languageName "HTML"
 	extensions "html,htm"
 }
 
 {
-	name "PHP"
+	languageName "PHP"
 	extensions "php,php3"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -67,12 +67,12 @@
 }
 
 {
-	name "CSS"
+	languageName "CSS"
 	extensions "css"
 }
 
 {
-	name "Java"
+	languageName "Java"
 	extensions "java"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -80,7 +80,7 @@
 }
 
 {
-	name "Javascript"
+	languageName "Javascript"
 	extensions "js"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -88,57 +88,57 @@
 }
 
 {
-	name "Visual Basic"
+	languageName "Visual Basic"
 	extensions "cls,vb,bas,vbw,vbp,frm"
 }
 
 {
-	name "JSON"
+	languageName "JSON"
 	extensions "json"
 }
 
 {
-	name "XML"
+	languageName "XML"
 	extensions "xml"
 }
 
 {
-	name "Pascal"
+	languageName "Pascal"
 	extensions "pas"
 }
 
 {
-	name "Rust"
+	languageName "Rust"
 	extensions "rs"
 }
 
 {
-	name "Nim"
+	languageName "Nim"
 	extensions "nim"
 }
 {
 
-	name "Markdown"
+	languageName "Markdown"
 	extensions "md,markdown"
 }
 
 {
-	name "Shell Script"
+	languageName "Shell Script"
 	extensions "sh"
 }
 
 {
-	name "Scala"
+	languageName "Scala"
 	extensions "scala"
 }
 
 {
-	name "Assembly"
+	languageName "Assembly"
 	extensions "as,s"
 }
 
 {
-	name "Golang"
+	languageName "Golang"
 	extensions "go"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -146,6 +146,6 @@
 }
 
 {
-	name "Makefile"
+	languageName "Makefile"
 	extensions "mk,makefile"
 }
