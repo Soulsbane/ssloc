@@ -20,12 +20,11 @@ struct Record
 }
 
 alias RecordArray = Array!Record;
-RecordArray _DatArray;
 TextRecords!Record _LanguageRecords;
 
 shared static this()
 {
-	_DatArray = _LanguageRecords.parseRaw(LanguageData);
+	_LanguageRecords.parse(LanguageData);
 }
 
 enum MultiLineCommentType { None, Open, Close, OpenAndClose }
@@ -78,7 +77,9 @@ bool isSingleLineComment(const string line, const string language)
 
 string getLanguageFromFileExtension(const string extension)
 {
-	foreach(entry; _DatArray)
+	auto records = _LanguageRecords.getRecordsRaw();
+
+	foreach(entry; records)
 	{
 		import std.array : split;
 		immutable auto parts = entry.extensions.split(",");
