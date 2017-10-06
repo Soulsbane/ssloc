@@ -5,6 +5,14 @@ import textrecords;
 
 enum LanguageData = import("language.tr");
 
+enum MultiLineCommentType
+{
+	None,
+	Open,
+	Close,
+	OpenAndClose
+}
+
 struct Record
 {
 	string languageName;
@@ -20,8 +28,6 @@ shared static this()
 {
 	_LanguageRecords.parse(LanguageData);
 }
-
-enum MultiLineCommentType { None, Open, Close, OpenAndClose }
 
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
