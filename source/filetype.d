@@ -34,7 +34,7 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 {
 	auto found = _LanguageRecords.findByLanguageName(language);
 
-	if(found.length)
+	if(found.length == 1)
 	{
 		immutable string commentOpen = found[0].multiLineCommentOpen;
 		immutable string commentClose = found[0].multiLineCommentClose;
@@ -63,7 +63,7 @@ bool isSingleLineComment(const string line, const string language)
 	string singleLineComment;
 	auto found = _LanguageRecords.findByLanguageName(language);
 
-	if(found.length)
+	if(found.length == 1)
 	{
 		singleLineComment = found[0].singleLineComment;
 	}
