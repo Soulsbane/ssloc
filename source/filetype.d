@@ -77,9 +77,7 @@ bool isSingleLineComment(const string line, const string language)
 
 string getLanguageFromFileExtension(const string extension)
 {
-	auto records = _LanguageRecords.getRecordsRaw();
-
-	foreach(entry; records)
+	foreach(entry; _LanguageRecords)
 	{
 		import std.array : split;
 		immutable auto parts = entry.extensions.split(",");
