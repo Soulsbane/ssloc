@@ -1,4 +1,5 @@
 module statsformatter;
+//TODO: Add colorized output.
 
 import std.stdio, std.algorithm, std.conv, std.range;
 
