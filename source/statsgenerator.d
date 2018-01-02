@@ -2,6 +2,7 @@ module statsgenerator;
 
 import std.stdio, std.string, std.file, std.algorithm, std.path;
 import std.array, std.utf, core.time, std.exception, std.conv, std.typecons;
+import core.atomic, std.parallelism;
 
 import filetype;
 import statsformatter;
@@ -26,7 +27,99 @@ struct LineTotals
 
 struct StatsGenerator
 {
-	void scan()
+	void scanFile(const DirEntry e)
+	{
+		immutable string name = buildNormalizedPath(e.name);
+		immutable string fileExtension = e.name.baseName.extension.removeChars(".");
+		immutable string language = getLanguageFromFileExtension(fileExtension);
+
+		if(language != "Unknown")
+		{
+			LanguageTotals currentLanguageTotals;
+			immutable string text = readText(name).ifThrown!UTFException("");
+			immutable auto lines = text.lineSplitter().array;
+
+			if(language in languageTotals_)
+			{
+				currentLanguageTotals = languageTotals_[language];
+			}
+
+			++currentLanguageTotals.files;
+			lineTotals_.lines = lineTotals_.lines + lines.length;
+
+			bool inCommentBlock;
+
+			foreach(rawLine; lines)
+			{
+				immutable string line = rawLine.strip.chompPrefix("\t");
+
+				//if(!line.empty || inCommentBlock) // Maybe as an option to count blanks if inside comment block
+				if(!line.empty)
+				{
+					if(isSingleLineComment(line, language))
+					{
+						++currentLanguageTotals.comments;
+						++lineTotals_.comments;
+					}
+					else if(auto commentType = isMultiLineComment(line, language))
+					{
+						if(commentType == MultiLineCommentType.Open)
+						{
+							++currentLanguageTotals.comments;
+							++lineTotals_.comments;
+
+							inCommentBlock = true;
+						}
+
+						if(commentType == MultiLineCommentType.Close)
+						{
+							++currentLanguageTotals.comments;
+							++lineTotals_.comments;
+
+							inCommentBlock = false;
+						}
+
+						if(commentType == MultiLineCommentType.OpenAndClose)
+						{
+							++currentLanguageTotals.comments;
+							++lineTotals_.comments;
+						}
+					}
+					else if(inCommentBlock)
+					{
+						++currentLanguageTotals.comments;
+						++lineTotals_.comments;
+					}
+					else
+					{
+						++currentLanguageTotals.code;
+						++lineTotals_.code;
+					}
+				}
+				else
+				{
+					++currentLanguageTotals.blank;
+					++lineTotals_.blank;
+				}
+
+				++currentLanguageTotals.total;
+			}
+
+			languageTotals_[language] = currentLanguageTotals;
+		}
+		else
+		{
+			if(!fileExtension.empty)
+			{
+				//debug writeln("Unknown extension, ", fileExtension, " found!");
+				++unknowns_;
+			}
+		}
+
+		++lineTotals_.files;
+	}
+
+	void scanFiles()
 	{
 		auto files = getcwd.dirEntries(SpanMode.depth)
 			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile));
@@ -34,94 +127,7 @@ struct StatsGenerator
 		//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
 		foreach(e; files)
 		{
-			immutable string name = buildNormalizedPath(e.name);
-			immutable string fileExtension = e.name.baseName.extension.removeChars(".");
-			immutable string language = getLanguageFromFileExtension(fileExtension);
-
-			if(language != "Unknown")
-			{
-				LanguageTotals currentLanguageTotals;
-				immutable string text = readText(name).ifThrown!UTFException("");
-				immutable auto lines = text.lineSplitter().array;
-
-				if(language in languageTotals_)
-				{
-					currentLanguageTotals = languageTotals_[language];
-				}
-
-				++currentLanguageTotals.files;
-				lineTotals_.lines = lineTotals_.lines + lines.length;
-
-				bool inCommentBlock;
-
-				foreach(rawLine; lines)
-				{
-					immutable string line = rawLine.strip.chompPrefix("\t");
-
-					//if(!line.empty || inCommentBlock) // Maybe as an option to count blanks if inside comment block
-					if(!line.empty)
-					{
-						if(isSingleLineComment(line, language))
-						{
-							++currentLanguageTotals.comments;
-							++lineTotals_.comments;
-						}
-						else if(auto commentType = isMultiLineComment(line, language))
-						{
-							if(commentType == MultiLineCommentType.Open)
-							{
-								++currentLanguageTotals.comments;
-								++lineTotals_.comments;
-
-								inCommentBlock = true;
-							}
-
-							if(commentType == MultiLineCommentType.Close)
-							{
-								++currentLanguageTotals.comments;
-								++lineTotals_.comments;
-
-								inCommentBlock = false;
-							}
-
-							if(commentType == MultiLineCommentType.OpenAndClose)
-							{
-								++currentLanguageTotals.comments;
-								++lineTotals_.comments;
-							}
-						}
-						else if(inCommentBlock)
-						{
-							++currentLanguageTotals.comments;
-							++lineTotals_.comments;
-						}
-						else
-						{
-							++currentLanguageTotals.code;
-							++lineTotals_.code;
-						}
-					}
-					else
-					{
-						++currentLanguageTotals.blank;
-						++lineTotals_.blank;
-					}
-
-					++currentLanguageTotals.total;
-				}
-
-				languageTotals_[language] = currentLanguageTotals;
-			}
-			else
-			{
-				if(!fileExtension.empty)
-				{
-					debug writeln("Unknown extension, ", fileExtension, " found!");
-					++unknowns_;
-				}
-			}
-
-			++lineTotals_.files;
+			scanFile(e);
 		}
 	}
 

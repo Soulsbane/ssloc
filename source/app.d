@@ -20,7 +20,7 @@ void main(string[] arguments)
 	}
 	else
 	{
-		gen.scan();
+		gen.scanFiles();
 
 		auto endTime = MonoTime.currTime;
 		auto timeTaken = endTime - startTime;
