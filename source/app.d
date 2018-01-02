@@ -14,11 +14,7 @@ void main(string[] arguments)
 	options.sort = true;
 	immutable string message = generateGetOptCode!Options(arguments, options);
 
-	if(message != string.init)
-	{
-		writeln(message);
-	}
-	else
+	void scanFiles()
 	{
 		gen.scanFiles();
 
@@ -29,4 +25,25 @@ void main(string[] arguments)
 		writeln("Time taken: ", timeTaken);
 		gen.outputResults(options.sort);
 	}
+
+	if(message != string.init)
+	{
+		writeln(message);
+	}
+	else
+	{
+		if(arguments.length > 1)
+		{
+			if(arguments[1] != "--help")
+			{
+				scanFiles();
+			}
+		}
+		else
+		{
+			scanFiles();
+		}
+	}
+
+
 }
