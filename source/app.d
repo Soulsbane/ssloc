@@ -1,4 +1,5 @@
 import std.stdio, core.time;
+import std.datetime.stopwatch;
 
 import config;
 import filetype;
@@ -10,18 +11,15 @@ class SslocApplication: Application!Options
 {
 	this()
 	{
-		startTime_ = MonoTime.currTime;
+		stopWatch_ = StopWatch(AutoStart.yes);
 	}
 
 	void scanFiles()
 	{
 		statsGenerator_.scanFiles();
+		stopWatch_.stop();
 
-		auto endTime = MonoTime.currTime;
-		auto timeTaken = endTime - startTime_;
-
-		writeln;
-		writeln("Time taken: ", timeTaken);
+		writeln("Time taken: ", stopWatch_.peek());
 		statsGenerator_.outputResults(options.sort);
 	}
 
@@ -37,7 +35,7 @@ class SslocApplication: Application!Options
 
 private:
 	StatsGenerator statsGenerator_;
-	MonoTime startTime_;
+	StopWatch stopWatch_;
 }
 
 void main(string[] arguments)
