@@ -4,46 +4,44 @@ import config;
 import filetype;
 import statsformatter;
 import statsgenerator;
+import dapplicationbase;
 
-void main(string[] arguments)
+class SslocApplication: Application!Options
 {
-	auto startTime = MonoTime.currTime;
-	StatsGenerator gen;
-	Options options;
-
-	options.sort = true;
-	immutable string message = generateGetOptCode!Options(arguments, options);
+	this()
+	{
+		startTime_ = MonoTime.currTime;
+	}
 
 	void scanFiles()
 	{
-		gen.scanFiles();
+		statsGenerator_.scanFiles();
 
 		auto endTime = MonoTime.currTime;
-		auto timeTaken = endTime - startTime;
+		auto timeTaken = endTime - startTime_;
 
 		writeln;
 		writeln("Time taken: ", timeTaken);
-		gen.outputResults(options.sort);
+		statsGenerator_.outputResults(options.sort);
 	}
 
-	if(message != string.init)
+	override void onValidArguments()
 	{
-		writeln(message);
+		scanFiles();
 	}
-	else
+
+	override void onNoArguments()
 	{
-		if(arguments.length > 1)
-		{
-			if(arguments[1] != "--help")
-			{
-				scanFiles();
-			}
-		}
-		else
-		{
-			scanFiles();
-		}
+		scanFiles();
 	}
 
+private:
+	StatsGenerator statsGenerator_;
+	MonoTime startTime_;
+}
 
+void main(string[] arguments)
+{
+	auto app = new SslocApplication;
+	app.create("Raijinsoft", "ssloc", arguments);
 }
