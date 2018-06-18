@@ -23,6 +23,7 @@ class SslocApplication: Application!Options
 		writeln("Time taken: ", stopWatch_.peek());
 		statsGenerator_.outputResults(options.sort);
 	}
+
 	void scanFiles()
 	{
 		statsGenerator_.scanFiles();
