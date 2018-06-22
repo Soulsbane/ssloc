@@ -111,8 +111,8 @@ struct StatsGenerator
 		{
 			if(!fileExtension.empty)
 			{
-				//debug writeln("Unknown extension, ", fileExtension, " found!");
 				++unknowns_;
+				unknownFileExtensions_ ~= fileExtension;
 			}
 		}
 
@@ -186,10 +186,26 @@ struct StatsGenerator
 		writeln;
 	}
 
+	void listUnknownFileExtensions()
+	{
+		debug
+		{
+			string[] uniqueFileExtensions = unknownFileExtensions_.uniq.array;
+
+			writeln("Found some unknown file extensions:.");
+			writeln(uniqueFileExtensions);
+		}
+		else
+		{
+			writeln("Feature only available in debug build!");
+		}
+	}
+
 private:
 	LineTotals lineTotals_;
 	size_t unknowns_;
 	LanguageTotals[string] languageTotals_;
+	string[] unknownFileExtensions_;
 }
 
 bool isHiddenFileOrDir(DirEntry entry)

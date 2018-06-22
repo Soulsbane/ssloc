@@ -33,16 +33,27 @@ class SslocApplication: Application!Options
 		statsGenerator_.outputResults(options.sort);
 	}
 
+	void listUnknownFileExtensions()
+	{
+		if(options.hasListUnknowns())
+		{
+			statsGenerator_.listUnknownFileExtensions();
+		}
+	}
+
 	override void onValidArguments()
 	{
 		if(options.hasFile()) // --file argument was passed
 		{
 			immutable string fileName = options.getFile();
+
 			scanFile(DirEntry(fileName));
+			listUnknownFileExtensions();
 		}
 		else
 		{
 			scanFiles();
+			listUnknownFileExtensions();
 		}
 	}
 
@@ -58,6 +69,7 @@ private:
 
 void main(string[] arguments)
 {
+	//TODO: Add progressbar when scanning files.
 	auto app = new SslocApplication;
 	app.create("Raijinsoft", "ssloc", arguments);
 }
