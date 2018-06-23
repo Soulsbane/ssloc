@@ -211,7 +211,7 @@ struct StatsGenerator
 		{
 			string[] uniqueFileExtensions = unknownFileExtensions_.uniq.array;
 
-			writeln("Found some unknown file extensions:.");
+			writeln("Found ", uniqueFileExtensions.length, " unknown file extensions:");
 			writeln(uniqueFileExtensions);
 		}
 		else
