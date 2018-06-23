@@ -2,7 +2,9 @@ module statsgenerator;
 
 import std.stdio, std.string, std.file, std.algorithm, std.path;
 import std.array, std.utf, core.time, std.exception, std.conv, std.typecons;
-import core.atomic, std.parallelism;
+import core.atomic, std.parallelism, std.range;
+
+import progress;
 
 import filetype;
 import statsformatter;
@@ -124,11 +126,26 @@ struct StatsGenerator
 		auto files = getcwd.dirEntries(SpanMode.depth)
 			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile));
 
+		auto filesToWalk = getcwd.dirEntries(SpanMode.depth)
+			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile));
+
+		//NOTE: walkLength comsumes the range so we have to create the files range twice.
+		immutable auto numberOfFilesToScan = walkLength(filesToWalk);
+		ChargingBar progress = new ChargingBar();
+
+		progress.message = { return "Searching"; };
+		progress.suffix = { return format("%0.0f", progress.percent).to!string ~ "% "; };
+		progress.width = 64;
+		progress.max = numberOfFilesToScan;
+
 		//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
 		foreach(e; files)
 		{
 			scanFile(e);
+			progress.next();
 		}
+
+		progress.finish();
 	}
 
 	void outputResults(const bool sortByLanguage)
