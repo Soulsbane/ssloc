@@ -131,9 +131,11 @@ struct StatsGenerator
 
 		//NOTE: walkLength comsumes the range so we have to create the files range twice.
 		immutable auto numberOfFilesToScan = walkLength(filesToWalk);
+
+		writeln("Found ", numberOfFilesToScan, " files to scan:");
 		ChargingBar progress = new ChargingBar();
 
-		progress.message = { return "Searching"; };
+		progress.message = { return "Scanning"; };
 		progress.suffix = { return format("%0.0f", progress.percent).to!string ~ "% "; };
 		progress.width = 64;
 		progress.max = numberOfFilesToScan;
