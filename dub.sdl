@@ -7,3 +7,5 @@ dependency "textrecords" version="*"
 dependency "ctoptions" version="*"
 dependency "dstringutils" version="*"
 dependency "dapplicationbase" version="*"
+
+dependency "progress" version="~>5.0.1"
