@@ -69,7 +69,8 @@ private:
 
 void main(string[] arguments)
 {
-	//TODO: Add progressbar when scanning files.
 	auto app = new SslocApplication;
+
+	writeln("Gathering files for scanning...");
 	app.create("Raijinsoft", "ssloc", arguments);
 }
