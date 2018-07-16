@@ -3,8 +3,6 @@ module filetype;
 import std.algorithm : startsWith, canFind;
 import textrecords;
 
-enum LanguageData = import("language.tr");
-
 enum MultiLineCommentType
 {
 	None,
@@ -26,7 +24,8 @@ TextRecords!Record _LanguageRecords;
 
 shared static this()
 {
-	_LanguageRecords.parse(LanguageData);
+	enum languageData = import("language.tr");
+	_LanguageRecords.parse(languageData);
 }
 
 MultiLineCommentType isMultiLineComment(const string line, const string language)
