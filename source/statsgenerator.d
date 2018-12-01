@@ -126,11 +126,10 @@ struct StatsGenerator
 		auto files = getcwd.dirEntries(SpanMode.depth)
 			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile));
 
-		auto filesToWalk = getcwd.dirEntries(SpanMode.depth)
-			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile));
-
 		//NOTE: walkLength comsumes the range so we have to create the files range twice.
-		immutable auto numberOfFilesToScan = walkLength(filesToWalk);
+		immutable auto numberOfFilesToScan = getcwd.dirEntries(SpanMode.depth)
+			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile))
+			.walkLength;
 
 		writeln("Found ", numberOfFilesToScan, " files to scan:");
 		ChargingBar progress = new ChargingBar();
