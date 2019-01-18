@@ -24,7 +24,7 @@ TextRecords!Record _LanguageRecords;
 
 shared static this()
 {
-	enum languageData = import("language.tr");
+	immutable string languageData = import("language.tr");
 	_LanguageRecords.parse(languageData);
 }
 
