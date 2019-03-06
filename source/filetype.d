@@ -31,11 +31,11 @@ shared static this()
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
 	auto found = _LanguageRecords.findByLanguageName(language);
-
-	if(found.length == 1)
+	// FIXME: Really need a better check.
+	if(found.singleLineComment.length)
 	{
-		immutable string commentOpen = found[0].multiLineCommentOpen;
-		immutable string commentClose = found[0].multiLineCommentClose;
+		immutable string commentOpen = found.multiLineCommentOpen;
+		immutable string commentClose = found.multiLineCommentClose;
 
 		if(commentOpen.length && (line.startsWith(commentOpen) && line.canFind(commentClose)))
 		{
@@ -58,12 +58,13 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 
 bool isSingleLineComment(const string line, const string language)
 {
+	// TODO: Handle comments that appear at middle/end of line.
 	string singleLineComment;
 	auto found = _LanguageRecords.findByLanguageName(language);
 
-	if(found.length == 1)
+	if(found.singleLineComment.length)
 	{
-		singleLineComment = found[0].singleLineComment;
+		singleLineComment = found.singleLineComment;
 	}
 
 	if(singleLineComment.length && line.startsWith(singleLineComment))
