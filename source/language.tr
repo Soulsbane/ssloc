@@ -1,74 +1,609 @@
 {
-	languageName "DLang"
-	extensions "d,di,ddoc"
+	languageName "Jai"
+	extensions "jai"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
 	multiLineCommentClose "*/"
 }
 
 {
-	languageName "Lua"
-	extensions "lua"
+	languageName "Isabelle"
+	extensions "thy"
 	singleLineComment "--"
-	multiLineCommentOpen "-[["
-	multiLineCommentClose "--]]"
+	multiLineCommentOpen "{*,(*,‹,\\<open>"
+	multiLineCommentClose "*},*),›,\\<close>"
 }
 
 {
-	languageName "SDLang"
-	extensions "sdl"
+	languageName "Polly"
+	extensions "polly"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
 }
 
 {
-	languageName "Python"
-	extensions "py"
+	languageName "Bash"
+	extensions "bash"
 	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
-	languageName "C/C++"
-	extensions "c,cpp,cxx,h,hh,hpp"
+	languageName "Automake"
+	extensions "am"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Jsx"
+	extensions "jsx"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
 	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Assembly"
+	extensions "s, asm"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "VimScript"
+	extensions "vim"
+	singleLineComment "\""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Julia"
+	extensions "jl"
+	singleLineComment "#"
+	multiLineCommentOpen "#="
+	multiLineCommentClose "=#"
+}
+
+{
+	languageName "UnrealShader"
+	extensions "usf"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Qml"
+	extensions "qml"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Zsh"
+	extensions "zsh"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "UnrealPlugin"
+	extensions "uplugin"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Dart"
+	extensions "dart"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "BrightScript"
+	extensions "brs"
+	singleLineComment "', REM"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Rakefile"
+	extensions "rake"
+	singleLineComment "#"
+	multiLineCommentOpen "=begin"
+	multiLineCommentClose "=end"
+}
+
+{
+	languageName "Prolog"
+	extensions "p, pro"
+	singleLineComment "%"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Tcl"
+	extensions "tcl"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Coq"
+	extensions "v"
+	singleLineComment ""
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "Markdown"
+	extensions "md, markdown"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "FSharp"
+	extensions "fs, fsi, fsx, fsscript"
+	singleLineComment "//"
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "UrWebProject"
+	extensions "urp"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Spice"
+	extensions "ckt"
+	singleLineComment "*"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Rust"
+	extensions "rs"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Julius"
+	extensions "julius"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Scons"
+	extensions ""
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "D"
+	extensions "d"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "PureScript"
+	extensions "purs"
+	singleLineComment "--"
+	multiLineCommentOpen "{-"
+	multiLineCommentClose "-}"
+}
+
+{
+	languageName "Hlsl"
+	extensions "hlsl"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "UnrealShaderHeader"
+	extensions "ush"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "XSL"
+	extensions "xsl, xslt"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Asp"
+	extensions "asa, asp"
+	singleLineComment "', REM"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "AspNet"
+	extensions "asax, ascx, asmx, aspx, master, sitemap, webinfo"
+	singleLineComment ""
+	multiLineCommentOpen "<!--,<%--"
+	multiLineCommentClose "-->,-->"
+}
+
+{
+	languageName "Crystal"
+	extensions "cr"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "VisualBasic"
+	extensions "vb"
+	singleLineComment "'"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Org"
+	extensions "org"
+	singleLineComment "# "
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "VisualStudioProject"
+	extensions "vcproj, vcxproj"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Sass"
+	extensions "sass, scss"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "VerilogArgsFile"
+	extensions "irunargs, xrunargs"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "RubyHtml"
+	extensions "rhtml"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Elisp"
+	extensions "el"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "TypeScript"
+	extensions "ts, tsx"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "ReStructuredText"
+	extensions "rst"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Elvish"
+	extensions "elv"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Glsl"
+	extensions "vert, tesc, tese, geom, frag, comp, glsl"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "UnrealScript"
+	extensions "uc, uci, upkg"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Cabal"
+	extensions "cabal"
+	singleLineComment "--"
+	multiLineCommentOpen "{-"
+	multiLineCommentClose "-}"
+}
+
+{
+	languageName "Xtend"
+	extensions "xtend"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Nix"
+	extensions "nix"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "ObjectiveCpp"
+	extensions "mm"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Wolfram"
+	extensions "nb, wl"
+	singleLineComment ""
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "Dockerfile"
+	extensions "dockerfile, dockerignore"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Lean"
+	extensions "lean, hlean"
+	singleLineComment "--"
+	multiLineCommentOpen "/-"
+	multiLineCommentClose "-/"
+}
+
+{
+	languageName "Edn"
+	extensions "edn"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Forth"
+	extensions "4th, forth, fr, frt, fth, f83, fb, fpm, e4, rx, ft"
+	singleLineComment "\\"
+	multiLineCommentOpen "( "
+	multiLineCommentClose ")"
+}
+
+{
+	languageName "UnrealProject"
+	extensions "uproject"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Haxe"
+	extensions "hx"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Json"
+	extensions "json"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "UnrealDeveloperMarkdown"
+	extensions "udn"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "DreamMaker"
+	extensions "dm, dme"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "CppHeader"
+	extensions "hh, hpp, hxx, inl, ipp"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "CShell"
+	extensions "csh"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
 	languageName "Ruby"
 	extensions "rb"
 	singleLineComment "#"
+	multiLineCommentOpen "=begin"
+	multiLineCommentClose "=end"
 }
 
 {
-	languageName "Perl"
-	extensions "pl,cgi"
-	singleLineComment "#"
+	languageName "Hcl"
+	extensions "tf, tfvars"
+	singleLineComment "#, //"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
-	languageName "C#"
-	extensions "cs"
+	languageName "Logtalk"
+	extensions "lgt, logtalk"
+	singleLineComment "%"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Xaml"
+	extensions "xaml"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Lua"
+	extensions "lua"
+	singleLineComment "--"
+	multiLineCommentOpen "--[["
+	multiLineCommentClose "]]"
+}
+
+{
+	languageName "AutoHotKey"
+	extensions "ahk"
+	singleLineComment ";"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "ColdFusion"
+	extensions "cfm"
+	singleLineComment ""
+	multiLineCommentOpen "<!---"
+	multiLineCommentClose "--->"
+}
+
+{
+	languageName "Autoconf"
+	extensions "in"
+	singleLineComment "#, dnl"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "CHeader"
+	extensions "h"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
 	multiLineCommentClose "*/"
 }
 
 {
-	languageName "HTML"
-	extensions "html,htm"
+	languageName "FEN"
+	extensions "fen"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
-	languageName "PHP"
-	extensions "php,php3"
+	languageName "Php"
+	extensions "php"
+	singleLineComment "#, //"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Processing"
+	extensions "pde"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
 	multiLineCommentClose "*/"
 }
 
 {
-	languageName "CSS"
-	extensions "css"
+	languageName "C"
+	extensions "c, ec, pgc"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Less"
+	extensions "less"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
@@ -80,65 +615,391 @@
 }
 
 {
-	languageName "Javascript"
-	extensions "js"
+	languageName "Sql"
+	extensions "sql"
+	singleLineComment "--"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Vala"
+	extensions "vala"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
 	multiLineCommentClose "*/"
 }
 
 {
-	languageName "Visual Basic"
-	extensions "cls,vb,bas,vbw,vbp,frm"
+	languageName "FortranModern"
+	extensions "f03, f08, f90, f95"
+	singleLineComment "!"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
-	languageName "JSON"
-	extensions "json"
+	languageName "Alex"
+	extensions "x"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
-	languageName "XML"
+	languageName "Zig"
+	extensions "zig"
+	singleLineComment "//"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Liquid"
+	extensions "liquid"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Qcl"
+	extensions "qcl"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Tex"
+	extensions "tex, sty"
+	singleLineComment "%"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Perl6"
+	extensions "pl6, pm6"
+	singleLineComment "#"
+	multiLineCommentOpen "=begin"
+	multiLineCommentClose "=end"
+}
+
+{
+	languageName "Mustache"
+	extensions "mustache"
+	singleLineComment ""
+	multiLineCommentOpen "{{!"
+	multiLineCommentClose "}}"
+}
+
+{
+	languageName "ClojureScript"
+	extensions "cljs"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Racket"
+	extensions "rkt"
+	singleLineComment ";"
+	multiLineCommentOpen "#|"
+	multiLineCommentClose "|#"
+}
+
+{
+	languageName "Toml"
+	extensions "toml"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Cassius"
+	extensions "cassius"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Ada"
+	extensions "ada, adb, ads, pad"
+	singleLineComment "--"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Twig"
+	extensions "twig"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Fish"
+	extensions "fish"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Erlang"
+	extensions "erl, hrl"
+	singleLineComment "%"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Html"
+	extensions "html, htm"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "DotNetResource"
+	extensions "resx"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Cobol"
+	extensions "cob, cbl, ccp, cobol, cpy"
+	singleLineComment "*"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Protobuf"
+	extensions "proto"
+	singleLineComment "//"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Kotlin"
+	extensions "kt, kts"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "DeviceTree"
+	extensions "dts, dtsi"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Happy"
+	extensions "y, ly"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "EmacsDevEnv"
+	extensions "ede"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "JavaScript"
+	extensions "js, mjs"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Swig"
+	extensions "swg, i"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "SystemVerilog"
+	extensions "sv, svh"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Xml"
 	extensions "xml"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Css"
+	extensions "css"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "IntelHex"
+	extensions "ihex"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Svg"
+	extensions "svg"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "CMake"
+	extensions "cmake"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Razor"
+	extensions "cshtml"
+	singleLineComment ""
+	multiLineCommentOpen "<!--,@*"
+	multiLineCommentClose "-->,*@"
+}
+
+{
+	languageName "SRecode"
+	extensions "srt"
+	singleLineComment ";;"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Lucius"
+	extensions "lucius"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "KakouneScript"
+	extensions "kak"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
 	languageName "Pascal"
 	extensions "pas"
+	singleLineComment ""
+	multiLineCommentOpen "{,(*,{,(*"
+	multiLineCommentClose "},*),*),}"
 }
 
 {
-	languageName "Rust"
-	extensions "rs"
+	languageName "Idris"
+	extensions "idr, lidr"
+	singleLineComment "--"
+	multiLineCommentOpen "{-"
+	multiLineCommentClose "-}"
 }
 
 {
-	languageName "Nim"
-	extensions "nim"
-}
-{
-
-	languageName "Markdown"
-	extensions "md,markdown"
+	languageName "Scheme"
+	extensions "scm, ss"
+	singleLineComment ";"
+	multiLineCommentOpen "#|"
+	multiLineCommentClose "|#"
 }
 
 {
-	languageName "Shell Script"
-	extensions "sh"
+	languageName "ActionScript"
+	extensions "as"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
-	languageName "Scala"
-	extensions "scala"
+	languageName "GdScript"
+	extensions "gd"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
 
 {
-	languageName "Assembly"
-	extensions "as,s"
+	languageName "Swift"
+	extensions "swift"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
-	languageName "Golang"
+	languageName "Hamlet"
+	extensions "hamlet"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Handlebars"
+	extensions "hbs, handlebars"
+	singleLineComment ""
+	multiLineCommentOpen "<!--,{{!"
+	multiLineCommentClose "-->,}}"
+}
+
+{
+	languageName "Text"
+	extensions "text, txt"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "MsBuild"
+	extensions "csproj, vbproj, fsproj, props, targets"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Go"
 	extensions "go"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
@@ -146,6 +1007,386 @@
 }
 
 {
-	languageName "Makefile"
-	extensions "mk,makefile"
+	languageName "R"
+	extensions "r"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
 }
+
+{
+	languageName "OCaml"
+	extensions "ml, mli, re, rei"
+	singleLineComment ""
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "Ceylon"
+	extensions "ceylon"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "CSharp"
+	extensions "cs"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Clojure"
+	extensions "clj"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Vhdl"
+	extensions "vhd, vhdl"
+	singleLineComment "--"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "ModuleDef"
+	extensions "def"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Nim"
+	extensions "nim"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Abap"
+	extensions "abap"
+	singleLineComment "*, \""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Lisp"
+	extensions "lisp, lsp"
+	singleLineComment ";"
+	multiLineCommentOpen "#|"
+	multiLineCommentClose "|#"
+}
+
+{
+	languageName "PSL"
+	extensions "psl"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Haskell"
+	extensions "hs"
+	singleLineComment "--"
+	multiLineCommentOpen "{-"
+	multiLineCommentClose "-}"
+}
+
+{
+	languageName "Yaml"
+	extensions "yaml, yml"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "FortranLegacy"
+	extensions "f, for, ftn, f77, pfo"
+	singleLineComment "c, C, !, *"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Sh"
+	extensions "sh"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Python"
+	extensions "py"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Sml"
+	extensions "sml"
+	singleLineComment ""
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "Hex"
+	extensions "hex"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Groovy"
+	extensions "groovy, grt, gtpl, gvy"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Batch"
+	extensions "bat, btm, cmd"
+	singleLineComment "REM, ::"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "VBScript"
+	extensions "vbs"
+	singleLineComment "', REM"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Cpp"
+	extensions "cc, cpp, cxx, c++, pcc"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "VB6"
+	extensions "frm, bas, cls"
+	singleLineComment "'"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Fstar"
+	extensions "fst"
+	singleLineComment ""
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "Makefile"
+	extensions "makefile, mak, mk"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Oz"
+	extensions "oz"
+	singleLineComment "%"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "ClojureC"
+	extensions "cljc"
+	singleLineComment ";"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "SpecmanE"
+	extensions "e"
+	singleLineComment "--, //"
+	multiLineCommentOpen "'>"
+	multiLineCommentClose "<'"
+}
+
+{
+	languageName "Cogent"
+	extensions "cogent"
+	singleLineComment "--"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Mint"
+	extensions "mint"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Scala"
+	extensions "sc, scala"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Vue"
+	extensions "vue"
+	singleLineComment ""
+	multiLineCommentOpen "<!--"
+	multiLineCommentClose "-->"
+}
+
+{
+	languageName "Elixir"
+	extensions "ex, exs"
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Elm"
+	extensions "elm"
+	singleLineComment "--"
+	multiLineCommentOpen "{-"
+	multiLineCommentClose "-}"
+}
+
+{
+	languageName "Meson"
+	extensions ""
+	singleLineComment "#"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "NotQuitePerl"
+	extensions "nqp"
+	singleLineComment "#"
+	multiLineCommentOpen "=begin"
+	multiLineCommentClose "=end"
+}
+
+{
+	languageName "XcodeConfig"
+	extensions "xcconfig"
+	singleLineComment "//"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Perl"
+	extensions "pl, pm"
+	singleLineComment "#"
+	multiLineCommentOpen "=pod"
+	multiLineCommentClose "=cut"
+}
+
+{
+	languageName "Agda"
+	extensions "agda"
+	singleLineComment "--"
+	multiLineCommentOpen "{-"
+	multiLineCommentClose "-}"
+}
+
+{
+	languageName "VisualStudioSolution"
+	extensions "sln"
+	singleLineComment ""
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "Verilog"
+	extensions "vg, vh"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "ColdFusionScript"
+	extensions "cfc"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "Ini"
+	extensions "ini"
+	singleLineComment ";, #"
+	multiLineCommentOpen ""
+	multiLineCommentClose ""
+}
+
+{
+	languageName "UrWeb"
+	extensions "ur, urs"
+	singleLineComment ""
+	multiLineCommentOpen "(*"
+	multiLineCommentClose "*)"
+}
+
+{
+	languageName "ObjectiveC"
+	extensions "m"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
+{
+	languageName "CoffeeScript"
+	extensions "coffee"
+	singleLineComment "#"
+	multiLineCommentOpen "###"
+	multiLineCommentClose "###"
+}
+
+{
+	languageName "Madlang"
+	extensions "mad"
+	singleLineComment "#"
+	multiLineCommentOpen "{#"
+	multiLineCommentClose "#}"
+}
+
+{
+	languageName "LinkerScript"
+	extensions "lds"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
+}
+
