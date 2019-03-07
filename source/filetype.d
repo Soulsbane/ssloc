@@ -67,7 +67,7 @@ bool isSingleLineComment(const string line, const string language)
 		singleLineComment = found.singleLineComment;
 	}
 
-	if(singleLineComment.length && line.find(singleLineComment).length)
+	if(singleLineComment.length && line.canFind(singleLineComment))
 	{
 		return true;
 	}
