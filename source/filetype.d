@@ -1,6 +1,6 @@
 module filetype;
 
-import std.algorithm : startsWith, canFind;
+import std.algorithm : find, startsWith, canFind;
 import textrecords;
 
 enum MultiLineCommentType
@@ -67,7 +67,7 @@ bool isSingleLineComment(const string line, const string language)
 		singleLineComment = found.singleLineComment;
 	}
 
-	if(singleLineComment.length && line.startsWith(singleLineComment))
+	if(singleLineComment.length && line.find(singleLineComment).length)
 	{
 		return true;
 	}
