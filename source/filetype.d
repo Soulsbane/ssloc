@@ -31,7 +31,7 @@ shared static this()
 MultiLineCommentType isMultiLineComment(const string line, const string language)
 {
 	auto found = _LanguageRecords.findByLanguageName(language);
-	// FIXME: Really need a better check.
+
 	if(found.singleLineComment.length)
 	{
 		immutable string commentOpen = found.multiLineCommentOpen;
@@ -58,7 +58,6 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 
 bool isSingleLineComment(const string line, const string language)
 {
-	// TODO: Handle comments that appear at middle/end of line.
 	string singleLineComment;
 	auto found = _LanguageRecords.findByLanguageName(language);
 
