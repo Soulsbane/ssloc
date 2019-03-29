@@ -3,6 +3,8 @@ description "A minimal D application."
 copyright "Copyright © 2016, soulsbane"
 authors "soulsbane"
 stringImportPaths "source"
+dflags "-verrors=context"
+
 dependency "textrecords" version="*"
 dependency "ctoptions" version="*"
 dependency "dstringutils" version="*"
