@@ -559,14 +559,6 @@
 }
 
 {
-	languageName "CHeader"
-	extensions "h"
-	singleLineComment "//"
-	multiLineCommentOpen "/*"
-	multiLineCommentClose "*/"
-}
-
-{
 	languageName "FEN"
 	extensions "fen"
 	singleLineComment ""
@@ -1176,7 +1168,7 @@
 
 {
 	languageName "Cpp"
-	extensions "cc, cpp, cxx, c++, pcc"
+	extensions "h, cpp, cc, cxx, c++, pcc"
 	singleLineComment "//"
 	multiLineCommentOpen "/*"
 	multiLineCommentClose "*/"
