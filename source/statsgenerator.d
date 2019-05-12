@@ -40,6 +40,7 @@ struct StatsGenerator
 			LanguageTotals currentLanguageTotals;
 			immutable string text = readText(name).ifThrown!UTFException("");
 			immutable auto lines = text.lineSplitter().array;
+			bool inCommentBlock;
 
 			if(language in languageTotals_)
 			{
@@ -48,8 +49,6 @@ struct StatsGenerator
 
 			++currentLanguageTotals.files;
 			lineTotals_.lines = lineTotals_.lines + lines.length;
-
-			bool inCommentBlock;
 
 			foreach(rawLine; lines)
 			{
@@ -127,9 +126,9 @@ struct StatsGenerator
 			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile)).array;
 
 		immutable size_t numberOfFilesToScan = files.length;
+		ChargingBar progress = new ChargingBar();
 
 		writeln("Found ", numberOfFilesToScan, " files to scan:");
-		ChargingBar progress = new ChargingBar();
 
 		progress.message = { return "Scanning"; };
 		progress.suffix = { return format("%0.0f", progress.percent).to!string ~ "% "; };
