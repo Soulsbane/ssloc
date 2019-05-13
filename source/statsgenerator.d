@@ -149,7 +149,6 @@ struct StatsGenerator
 	{
 		writeln("Total lines processed: ", lineTotals_.lines.formatNumber);
 		writeln("Total files ignored: ", unknowns_.formatNumber);
-		 // TODO: Maybe add a list of ignored extensions as a command line argument.?
 		writeHeader;
 
 		if(sortByLanguage)
