@@ -8,7 +8,7 @@ import statsformatter;
 import statsgenerator;
 import dapplicationbase;
 
-class SslocApplication: Application!Options
+class SslocApplication: Application!SSLocOptions
 {
 	this()
 	{
@@ -21,7 +21,7 @@ class SslocApplication: Application!Options
 		stopWatch_.stop();
 
 		writeln("Time taken: ", stopWatch_.peek());
-		statsGenerator_.outputResults(options.sort);
+		statsGenerator_.outputResults(Options.sort);
 	}
 
 	void scanFiles()
@@ -30,12 +30,12 @@ class SslocApplication: Application!Options
 		stopWatch_.stop();
 
 		writeln("Time taken: ", stopWatch_.peek());
-		statsGenerator_.outputResults(options.sort);
+		statsGenerator_.outputResults(Options.sort);
 	}
 
 	void listUnknownFileExtensions()
 	{
-		if(options.hasListUnknowns())
+		if(Options.hasListUnknowns())
 		{
 			statsGenerator_.listUnknownFileExtensions();
 		}
@@ -43,9 +43,9 @@ class SslocApplication: Application!Options
 
 	override void onValidArguments()
 	{
-		if(options.hasFile()) // --file argument was passed
+		if(Options.hasFile()) // --file argument was passed
 		{
-			immutable string fileName = options.getFile();
+			immutable string fileName = Options.getFile();
 
 			scanFile(DirEntry(fileName));
 			listUnknownFileExtensions();
