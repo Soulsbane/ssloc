@@ -4,6 +4,7 @@ copyright "Copyright © 2016, soulsbane"
 authors "soulsbane"
 stringImportPaths "source"
 //dflags "-verrors=context"
+dflags "-static" platform="ldc"
 
 dependency "textrecords" version="*"
 dependency "ctoptions" version="*"
@@ -11,3 +12,5 @@ dependency "dstringutils" version="*"
 dependency "dapplicationbase" version="*"
 
 dependency "progress" version="~>5.0.1"
+
+

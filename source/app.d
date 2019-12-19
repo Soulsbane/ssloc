@@ -3,8 +3,6 @@ import std.datetime.stopwatch;
 import std.file;
 
 import config;
-import filetype;
-import statsformatter;
 import statsgenerator;
 import dapplicationbase;
 
