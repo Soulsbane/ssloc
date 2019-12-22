@@ -5,6 +5,8 @@ import std.array, std.utf, core.time, std.exception, std.conv, std.typecons;
 import core.atomic, std.parallelism, std.range;
 
 import progress;
+import colored;
+import asciitable;
 
 import filetype;
 import statsformatter;
@@ -147,9 +149,15 @@ struct StatsGenerator
 
 	void outputResults(const bool sortByLanguage)
 	{
+		auto table = new StatsFormatter(6);
+
+		table.writeHeader("Language", "Files", "Blank", "Comments", "Code", "Total");
+
+		// FIXME: Has column dividers at the moment.
+		//table.addBlankRow();
+
 		writeln("Total lines processed: ", lineTotals_.lines.formatNumber);
 		writeln("Total files ignored: ", unknowns_.formatNumber);
-		writeHeader;
 
 		if(sortByLanguage)
 		{
@@ -165,38 +173,21 @@ struct StatsGenerator
 			foreach(index, currentLanguageTotals; pairs)
 			{
 				// The key is index 0 and value(LanguageTotals structure is at index 1).
-				writeField(currentLanguageTotals[0], Fields.language);
-				writeField(currentLanguageTotals[1].files, Fields.files);
-				writeField(currentLanguageTotals[1].blank, Fields.blank);
-				writeField(currentLanguageTotals[1].comments, Fields.comments);
-				writeField(currentLanguageTotals[1].code, Fields.code);
-				writeField(currentLanguageTotals[1].total, Fields.total);
-				writeDivider;
+				table.addRow(currentLanguageTotals[0], currentLanguageTotals[1].files, currentLanguageTotals[1].blank,
+				currentLanguageTotals[1].comments, currentLanguageTotals[1].code, currentLanguageTotals[1].total);
 			}
 		}
 		else
 		{
 			foreach(key, currentLanguageTotals; languageTotals_)
 			{
-				writeField(key, Fields.language);
-				writeField(currentLanguageTotals.files, Fields.files);
-				writeField(currentLanguageTotals.blank, Fields.blank);
-				writeField(currentLanguageTotals.comments, Fields.comments);
-				writeField(currentLanguageTotals.code, Fields.code);
-				writeField(currentLanguageTotals.code, Fields.total);
-				writeDivider;
+				table.addRow(key, currentLanguageTotals.files, currentLanguageTotals.blank,
+				currentLanguageTotals.comments, currentLanguageTotals.code, currentLanguageTotals.total);
 			}
 		}
 
-		writeln;
-		writeField("Total", Fields.language);
-		writeField(lineTotals_.files, Fields.files);
-		writeField(lineTotals_.blank, Fields.blank);
-		writeField(lineTotals_.comments, Fields.comments);
-		writeField(lineTotals_.code, Fields.code);
-		writeField(lineTotals_.lines, Fields.total);
-		writeDivider;
-		writeln;
+		table.addRow("Total", lineTotals_.files, lineTotals_.blank, lineTotals_.comments, lineTotals_.code, lineTotals_.lines);
+		table.render();
 	}
 
 	void listUnknownFileExtensions()

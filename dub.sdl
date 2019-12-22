@@ -1,16 +1,12 @@
 name "ssloc"
 description "A minimal D application."
-copyright "Copyright © 2016, soulsbane"
 authors "soulsbane"
-stringImportPaths "source"
-//dflags "-verrors=context"
-dflags "-static" platform="ldc"
-
-dependency "textrecords" version="*"
-dependency "ctoptions" version="*"
-dependency "dstringutils" version="*"
-dependency "dapplicationbase" version="*"
-
+copyright "Copyright © 2016, soulsbane"
 dependency "progress" version="~>5.0.1"
-
-
+dependency "dapplicationbase" version=">=0.0.0"
+dependency "ctoptions" version=">=0.0.0"
+dependency "asciitable" version="~>0.0.10"
+dependency "dstringutils" version=">=0.0.0"
+dependency "textrecords" version=">=0.0.0"
+dflags "-static" platform="ldc"
+stringImportPaths "source"

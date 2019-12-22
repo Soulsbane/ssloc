@@ -1,19 +1,9 @@
 module statsformatter;
-//TODO: Add colorized output.
 
 import std.stdio, std.algorithm, std.conv, std.range;
 
-enum COLUMN_WIDTH = 95;
-
-enum Fields
-{
-	language = 20,
-	files = 15,
-	code = 15,
-	blank = 15,
-	comments = 15,
-	total = 15
-}
+import colored;
+import asciitable;
 
 string formatNumber(T)(T number)
 {
@@ -31,37 +21,77 @@ string formatNumber(T)(T number)
 	}
 }
 
-void writeDivider()
+string surround(const string value)
 {
-	writeln;
-	writeln("-".repeat(COLUMN_WIDTH).join);
+	import std.format : format;
+	return value.format!" %s ";
 }
 
-void writeField(T)(const T value, Fields field)
+class CustomAsciiParts : Parts
 {
-	immutable string strValue = value.formatNumber;
-	immutable size_t numberOfSpaces = field - strValue.length;
-
-	if(field == Fields.total)
+	this()
 	{
-		write(strValue);
-		write(" ".repeat(numberOfSpaces).join);
-	}
-	else
-	{
-		write(strValue);
-		write(" ".repeat(numberOfSpaces).join);
+		super("-", "|", "+", "+", "+", "+", "+", "+", "+", "+", "+", "-", "+", "+", "+");
 	}
 }
 
-void writeHeader()
+class CustomAsciiTable : AsciiTable
 {
-	writeln;
-	writeField("Language", Fields.language);
-	writeField("Files", Fields.files);
-	writeField("Blank", Fields.blank);
-	writeField("Comments", Fields.comments);
-	writeField("Code", Fields.code);
-	writeField("Total", Fields.total);
-	writeDivider;
+	this(size_t numColumns)
+	{
+		super(numColumns);
+	}
+
+	override Formatter format()
+	{
+		return Formatter(this);
+	}
+}
+
+class StatsFormatter
+{
+	CustomAsciiTable table_;
+
+	this(size_t numColumns)
+	{
+		table_ = new CustomAsciiTable(numColumns);
+	}
+
+	void writeHeader(T...)(T args)
+	{
+		auto header = table_.header;
+
+		static foreach(arg; args)
+		{
+			header.add(arg.surround);
+		}
+	}
+
+	void addBlankRow()
+	{
+		addRow(" "," "," "," "," "," ");
+	}
+
+	void addRow(T...)(T args)
+	{
+		auto row = table_.row;
+
+		static foreach(arg; args)
+		{
+			row.add(arg.formatNumber.surround);
+		}
+	}
+
+	void render()
+	{
+		auto formattedTable = table_
+		.format
+		.parts(new CustomAsciiParts)
+		.borders(true)
+		.separators(true)
+		.to!string
+		.lightBlue;
+
+		writeln(formattedTable);
+	}
 }
