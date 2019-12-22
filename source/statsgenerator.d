@@ -186,7 +186,9 @@ struct StatsGenerator
 			}
 		}
 
-		table.addRow("Total", lineTotals_.files, lineTotals_.blank, lineTotals_.comments, lineTotals_.code, lineTotals_.lines);
+		table.addRow("Total", lineTotals_.files, lineTotals_.blank, lineTotals_.comments, lineTotals_.code,
+		lineTotals_.lines);
+
 		table.render();
 	}
 
