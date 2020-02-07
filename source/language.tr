@@ -143,11 +143,11 @@
 }
 
 {
-	languageName "Coq"
-	extensions "v"
-	singleLineComment ""
-	multiLineCommentOpen "(*"
-	multiLineCommentClose "*)"
+	languageName "VLang"
+	extensions "v,vsh"
+	singleLineComment "//"
+	multiLineCommentOpen "/*"
+	multiLineCommentClose "*/"
 }
 
 {
