@@ -44,13 +44,14 @@ struct StatsGenerator
 			immutable auto lines = text.lineSplitter().array;
 			bool inCommentBlock;
 
-			++currentLanguageTotals.files;
 			lineTotals_.lines = lineTotals_.lines + lines.length;
 
 			if(language in languageTotals_)
 			{
 				currentLanguageTotals = languageTotals_[language];
 			}
+
+			++currentLanguageTotals.files;
 
 			foreach(rawLine; lines)
 			{
