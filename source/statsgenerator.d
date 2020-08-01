@@ -129,23 +129,19 @@ struct StatsGenerator
 			.filter!(a => (!isHiddenFileOrDir(a) && a.isFile)).array;
 
 		immutable size_t numberOfFilesToScan = files.length;
-		ChargingBar progress = new ChargingBar();
+		Spinner spinner= new Spinner();
 
-		writeln("Found ", numberOfFilesToScan, " files to scan:");
-
-		progress.message = { return "Scanning"; };
-		progress.suffix = { return format("%0.0f", progress.percent).to!string ~ "% "; };
-		progress.width = 64;
-		progress.max = numberOfFilesToScan;
+		spinner.message = { return "Scanning"; };
+		writeln("Found ", numberOfFilesToScan, " files to scan.");
 
 		//foreach(e; parallel(files)) // FIXME: Very buggy atm. Needs more research to find out why.
 		foreach(e; files)
 		{
 			scanFile(e);
-			progress.next();
+			spinner.next();
 		}
 
-		progress.finish();
+		spinner.finish();
 	}
 
 	void outputResults(const bool sortByLanguage)
