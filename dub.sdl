@@ -9,3 +9,8 @@ dependency "asciitable" version="~>0.0.10"
 dependency "dstringutils" version=">=0.0.0"
 dependency "textrecords" version=">=0.0.0"
 stringImportPaths "source"
+
+configuration "static" {
+	targetType "executable"
+	dflags "-static" platform="posix"
+}
