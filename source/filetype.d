@@ -1,6 +1,7 @@
 module filetype;
 
 import std.algorithm : find, startsWith, canFind;
+import std.string : stripLeft;
 import textrecords;
 
 enum MultiLineCommentType
@@ -56,7 +57,7 @@ MultiLineCommentType isMultiLineComment(const string line, const string language
 	return MultiLineCommentType.None;
 }
 
-bool isSingleLineComment(const string line, const string language)
+bool isSingleLineComment(const string line, const string language, bool countSameLineComments = false)
 {
 	string singleLineComment;
 	auto found = _LanguageRecords.findByLanguageName(language);
@@ -66,7 +67,12 @@ bool isSingleLineComment(const string line, const string language)
 		singleLineComment = found.singleLineComment;
 	}
 
-	if(singleLineComment.length && line.canFind(singleLineComment))
+	if(countSameLineComments && singleLineComment.length && line.canFind(singleLineComment))
+	{
+		return true;
+	}
+
+	if(singleLineComment.length && line.stripLeft.startsWith(singleLineComment))
 	{
 		return true;
 	}
